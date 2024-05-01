@@ -6,8 +6,8 @@
 
 <h3> 👨🏻‍💻 About Me </h3>
 
-- 🔭 &nbsp; Bachelor ： Beihang University
-- 🤔 &nbsp; Master ： Tsinghua University
+- 🔭 &nbsp; Bachelor ：Beihang University
+- 🤔 &nbsp; Master ：Tsinghua University
 - 🎓 &nbsp; Fileds : Medical Artificial Intelligence
 - 💼 &nbsp; Email : lingxt23@mails.tsinghua.edu.cn 
 
