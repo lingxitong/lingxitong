@@ -8,7 +8,7 @@
 
 - 🔭 &nbsp; Bachelor ：Beihang University
 - 🤔 &nbsp; Master ：Tsinghua University
-- 🎓 &nbsp; Fileds : Medical Artificial Intelligence
+- 🎓 &nbsp; Fileds : AI4Pathology
 - 💼 &nbsp; Email : lingxt23@mails.tsinghua.edu.cn 
 
 <h3>🛠 Tech Stack</h3>
