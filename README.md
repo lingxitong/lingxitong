@@ -13,7 +13,7 @@
 
 <h3>🛠 Tech Stack</h3>
 
-- 💻 &nbsp; Python  | Java | C++ | C  
+- 💻 &nbsp; Python  | Java | C++ | C#
 - 🛢 &nbsp; MySQL | Firebase | Xampp | docker
 - 🔧 &nbsp; Visual Studio code | PyCharm | Eclipse | Git
 
