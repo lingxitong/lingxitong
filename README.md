@@ -8,7 +8,7 @@
 
 - 🔭 &nbsp; Bachelor ：Beihang University
 - 🤔 &nbsp; Master ：Tsinghua University
-- 🎓 &nbsp; Fileds : AI4Pathology
+- 🎓 &nbsp; Fileds : AI4HealthCare/3DV/WorldModel
 - 💼 &nbsp; Email : lingxt23@mails.tsinghua.edu.cn 
 
 <h3>🛠 Tech Stack</h3>
