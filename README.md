@@ -2,7 +2,6 @@
   Hey there! I'm Xitong Ling.
 </h2>
 
-<img align="right" alt="Profile GIF" src="./assets/profile.gif" width="360"/>
 
 <h3>👨🏻‍💻 About Me</h3>
 
