@@ -1,29 +1,61 @@
-<h2> Hey there! I'm Xitong Ling. <img src="./assets/Hi.gif" width="25"></h2>
+<h2>
+  Hey there! I'm Xitong Ling.
+</h2>
 
-<img align="right" alt="GIF" src="./assets/profile.gif" width="400"/>
+<img align="right" alt="Profile GIF" src="./assets/profile.gif" width="360"/>
 
-<h3> 👨🏻‍💻 About Me </h3>
+<h3>👨🏻‍💻 About Me</h3>
 
 - 🔭 &nbsp; Bachelor: Beihang University
 - 🤔 &nbsp; Master: Tsinghua University
-- 🎓 &nbsp; Fields: AI4HealthCare / 3DV / World Model
-- 💼 &nbsp; Email: lingxt23@mails.tsinghua.edu.cn 
+- 🎓 &nbsp; Fields: AI4Healthcare / 3DV / World Model
+- 💼 &nbsp; Email: lingxt23@mails.tsinghua.edu.cn
+- 🧬 &nbsp; Research Interests: Computational Pathology, Foundation Models, Medical AI, WSI Analysis
+
+<br>
 
 <h3>🛠 Tech Stack</h3>
 
 - 💻 &nbsp; Python | Java | C++ | C#
 - 🛢 &nbsp; MySQL | Firebase | XAMPP | Docker
 - 🔧 &nbsp; VS Code | PyCharm | Eclipse | Git
+- 🧠 &nbsp; PyTorch | Hugging Face | OpenCV | Scikit-learn
 
 <br>
 
-<img align="center" src="https://github-readme-stats.vercel.app/api?username=lingxitong&include_all_commits=true&count_private=true&show_icons=true&line_height=20&title_color=7A7ADB&icon_color=2234AE&text_color=D3D3D3&bg_color=0,000000,130F40&v=1" alt="lingxitong's GitHub Stats">
+<h3>📊 GitHub Stats</h3>
 
-<br><br>
+<p align="center">
+  <img src="./profile/stats.svg" alt="Xitong Ling's GitHub Stats" width="520">
+</p>
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=lingxitong&layout=compact&text_color=daf7dc&bg_color=151515&v=1)](https://github.com/lingxitong)
+<p align="center">
+  <img src="./profile/top-langs.svg" alt="Top Languages" width="420">
+</p>
 
 <br>
 
-#### **Visitor Count**
-![Visitor Count](https://profile-counter.glitch.me/lingxitong/count.svg)
+<h3>🚀 Selected Projects</h3>
+
+- <b>Awesome-AI4DigitalPathology</b>: A curated repository for digital pathology AI models, datasets, tools, and papers.
+- <b>MIL_BASELINE</b>: A baseline framework for multiple instance learning in whole-slide image analysis.
+- <b>Pathology Foundation Models</b>: Research on scalable, transferable, and clinically relevant pathology representation learning.
+
+<br>
+
+<h3>📫 Contact</h3>
+
+<p>
+  Feel free to reach me at:
+  <br>
+  <b>Email:</b> lingxt23@mails.tsinghua.edu.cn
+</p>
+
+<br>
+
+<!-- Optional: Contribution Snake -->
+<!--
+<p align="center">
+  <img src="./profile/github-contribution-grid-snake.svg" alt="Contribution Snake">
+</p>
+-->
