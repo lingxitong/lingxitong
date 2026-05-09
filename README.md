@@ -34,16 +34,6 @@
 
 <br>
 
-<h3>🚀 Selected Projects</h3>
-
-- <b>Awesome-AI4DigitalPathology</b>: A curated repository for digital pathology AI models, datasets, tools, and papers.
-- <b>MIL_BASELINE</b>: A baseline framework for multiple instance learning in whole-slide image analysis.
-- <b>Pathology Foundation Models</b>: Research on scalable, transferable, and clinically relevant pathology representation learning.
-
-<br>
-
-<h3>📫 Contact</h3>
-
 <p>
   Feel free to reach me at:
   <br>
