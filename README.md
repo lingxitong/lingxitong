@@ -8,7 +8,7 @@
 - 🔭 &nbsp; Bachelor: Beihang University
 - 🤔 &nbsp; Master: Tsinghua University
 - 🎓 &nbsp; Fields: AI4Healthcare / 3DV / World Model
-- 💼 &nbsp; Email: lingxt23@mails.tsinghua.edu.cn
+- 💼 &nbsp; Email: lingxt23@mails.tsinghua.edu.cn/
 - 🧬 &nbsp; Research Interests: Computational Pathology, Foundation Models, Medical AI, WSI Analysis
 
 <br>
