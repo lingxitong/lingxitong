@@ -1,20 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="400" height="118" viewBox="0 0 400 118" role="img" aria-label="CAMELYON-PLUS-BENCHMARK">
 <defs>
   <linearGradient id="pinBg" x1="0%" y1="0%" x2="100%" y2="100%">
-  <stop offset="0%" stop-color="#660874"/>
-  <stop offset="100%" stop-color="#73408A"/>
-</linearGradient>
+    <stop offset="0%" stop-color="#1A0530"/>
+    <stop offset="55%" stop-color="#660874"/>
+    <stop offset="100%" stop-color="#9B59B6"/>
+  </linearGradient>
 </defs>
 <style>
   .name { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #FFFFFF; }
-  .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F3E8FF; }
+  .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #E9D5FF; }
   .meta { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F3E8FF; }
   .star-meta { font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F5D76E; }
 </style>
-<rect x="0.5" y="0.5" width="399" height="117" rx="12" fill="url(#pinBg)" stroke="#FFFFFF" stroke-opacity="0.22"/>
+<rect x="0.5" y="0.5" width="399" height="117" rx="12" fill="url(#pinBg)" stroke="#E9D5FF" stroke-opacity="0.35"/>
 <text class="name" x="18" y="30">CAMELYON-PLUS-BENCHMARK</text>
 <text class="desc" x="18" y="54">[Scientific Data] CAMELYON BENCHMARK : better</text><text class="desc" x="18" y="70">datasets for MIL methods</text>
-<circle cx="24" cy="96" r="4" fill="#FFFFFF"/>
+<circle cx="24" cy="96" r="4" fill="#C084FC"/>
 <text class="meta" x="34" y="100">Markdown</text>
 <text class="star-meta" x="150" y="100">★ 9</text>
 <text class="meta" x="230" y="100">fork 3</text>
