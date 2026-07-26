@@ -21,7 +21,7 @@
 ### About Me
 
 <p align="center">
-  <img src="./profile/about.svg" alt="About Xitong Ling" width="720">
+  <img src="./profile/about.svg" alt="About Xitong Ling" width="100%">
 </p>
 
 <p align="center">
@@ -36,6 +36,52 @@
 - Research Fields: Representation Learning / AI4Healthcare
 - Interests: Computational Pathology, Foundation Models, Multimodal Learning, WSI Analysis
 - Email: lingxt23@mails.tsinghua.edu.cn
+
+---
+
+### GitHub Stats
+
+<table width="100%">
+  <tr>
+    <td width="55%" valign="top">
+      <img src="./profile/stats-neon.svg" alt="GitHub Stats" width="100%">
+    </td>
+    <td width="45%" valign="top">
+      <img src="./profile/langs-neon.svg" alt="Top Languages" width="100%">
+    </td>
+  </tr>
+</table>
+
+---
+
+### Featured Work
+
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://github.com/lingxitong/MIL_BASELINE">
+        <img src="./profile/pin-MIL_BASELINE.svg" alt="MIL_BASELINE" width="100%">
+      </a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://github.com/lingxitong/Awesome-AI4DigitalPathology">
+        <img src="./profile/pin-Awesome-AI4DigitalPathology.svg" alt="Awesome-AI4DigitalPathology" width="100%">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://github.com/lingxitong/CVPR-2025-WSI-Papers">
+        <img src="./profile/pin-CVPR-2025-WSI-Papers.svg" alt="CVPR-2025-WSI-Papers" width="100%">
+      </a>
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://github.com/lingxitong/PFM_Segmentation">
+        <img src="./profile/pin-PFM_Segmentation.svg" alt="PFM_Segmentation" width="100%">
+      </a>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -56,44 +102,13 @@
 
 ---
 
-### Featured Work
-
-<p align="center">
-  <a href="https://github.com/lingxitong/MIL_BASELINE">
-    <img src="./profile/pin-MIL_BASELINE.svg" alt="MIL_BASELINE" width="400">
-  </a>
-  <a href="https://github.com/lingxitong/Awesome-AI4DigitalPathology">
-    <img src="./profile/pin-Awesome-AI4DigitalPathology.svg" alt="Awesome-AI4DigitalPathology" width="400">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/lingxitong/CVPR-2025-WSI-Papers">
-    <img src="./profile/pin-CVPR-2025-WSI-Papers.svg" alt="CVPR-2025-WSI-Papers" width="400">
-  </a>
-  <a href="https://github.com/lingxitong/PFM_Segmentation">
-    <img src="./profile/pin-PFM_Segmentation.svg" alt="PFM_Segmentation" width="400">
-  </a>
-</p>
-
----
-
-### GitHub Stats
-
-<p align="center">
-  <img src="./profile/stats-neon.svg" alt="GitHub Stats" width="520">
-  <img src="./profile/langs-neon.svg" alt="Top Languages" width="420">
-</p>
-
----
-
 ### Contribution Snake
 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/lingxitong/lingxitong/output/github-contribution-grid-snake-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/lingxitong/lingxitong/output/github-contribution-grid-snake.svg">
-    <img alt="github contribution snake" src="https://raw.githubusercontent.com/lingxitong/lingxitong/output/github-contribution-grid-snake.svg">
+    <img alt="github contribution snake" src="https://raw.githubusercontent.com/lingxitong/lingxitong/output/github-contribution-grid-snake.svg" width="100%">
   </picture>
 </p>
 
