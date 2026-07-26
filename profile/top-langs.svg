@@ -11,9 +11,9 @@
 <text class="label" x="20" y="54">Python</text>
 <rect class="track" x="130" y="44" width="160" height="8" rx="4"/>
 <rect x="130" y="44" width="160.0" height="8" rx="4" fill="#2f81f7"/>
-<text class="pct" x="340" y="54" text-anchor="end">93.8%</text>
+<text class="pct" x="340" y="54" text-anchor="end">94.1%</text>
 <text class="label" x="20" y="80">Groovy</text>
 <rect class="track" x="130" y="70" width="160" height="8" rx="4"/>
-<rect x="130" y="70" width="10.7" height="8" rx="4" fill="#3fb950"/>
-<text class="pct" x="340" y="80" text-anchor="end">6.2%</text>
+<rect x="130" y="70" width="10.0" height="8" rx="4" fill="#3fb950"/>
+<text class="pct" x="340" y="80" text-anchor="end">5.9%</text>
 </svg>
