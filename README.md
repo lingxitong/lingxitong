@@ -9,17 +9,17 @@
     </td>
     <td align="center" width="25%">
       <a href="mailto:lingxt23@mails.tsinghua.edu.cn">
-        <img src="https://img.shields.io/badge/Email-Tsinghua%20Mail-82318E?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
+        <img src="https://img.shields.io/badge/Email-Tsinghua%20Mail-660874?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
       </a>
     </td>
     <td align="center" width="25%">
       <a href="https://github.com/lingxitong">
-        <img src="https://img.shields.io/badge/GitHub-lingxitong-3D0A4A?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+        <img src="https://img.shields.io/badge/GitHub-lingxitong-660874?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
       </a>
     </td>
     <td align="center" width="25%">
       <a href="https://lingxitong.github.io/">
-        <img src="https://img.shields.io/badge/Publications-Homepage-9B59B6?style=for-the-badge&logo=googlescholar&logoColor=white" alt="Publications">
+        <img src="https://img.shields.io/badge/Publications-Homepage-660874?style=for-the-badge&logo=googlescholar&logoColor=white" alt="Publications">
       </a>
     </td>
   </tr>
@@ -38,10 +38,6 @@ I am a **PhD student at Tsinghua University (SIGS)**, previously trained at **Be
 | **Topics** | Computational Pathology · Foundation Models · MIL · Multimodal Learning · WSI Analysis |
 | **Homepage** | [lingxitong.github.io](https://lingxitong.github.io/) |
 | **Email** | [lingxt23@mails.tsinghua.edu.cn](mailto:lingxt23@mails.tsinghua.edu.cn) |
-
-### Research Focus
-
-<img src="./profile/focus.svg" alt="Research Focus" width="100%">
 
 ### GitHub Stats
 
@@ -130,12 +126,12 @@ I am a **PhD student at Tsinghua University (SIGS)**, previously trained at **Be
 <table width="100%">
   <tr>
     <td align="center"><img src="https://img.shields.io/badge/PyTorch-660874?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch"></td>
-    <td align="center"><img src="https://img.shields.io/badge/Hugging%20Face-82318E?style=for-the-badge&logo=huggingface&logoColor=white" alt="Hugging Face"></td>
-    <td align="center"><img src="https://img.shields.io/badge/OpenCV-9B59B6?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV"></td>
+    <td align="center"><img src="https://img.shields.io/badge/Hugging%20Face-660874?style=for-the-badge&logo=huggingface&logoColor=white" alt="Hugging Face"></td>
+    <td align="center"><img src="https://img.shields.io/badge/OpenCV-660874?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV"></td>
   </tr>
   <tr>
-    <td align="center"><img src="https://img.shields.io/badge/Scikit--learn-4A0A5C?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="Scikit-learn"></td>
-    <td align="center"><img src="https://img.shields.io/badge/Docker-82318E?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"></td>
+    <td align="center"><img src="https://img.shields.io/badge/Scikit--learn-660874?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="Scikit-learn"></td>
+    <td align="center"><img src="https://img.shields.io/badge/Docker-660874?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"></td>
     <td align="center"><img src="https://img.shields.io/badge/Git-660874?style=for-the-badge&logo=git&logoColor=white" alt="Git"></td>
   </tr>
 </table>
@@ -161,4 +157,4 @@ I am a **PhD student at Tsinghua University (SIGS)**, previously trained at **Be
   </tr>
 </table>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1A0530,40:660874,75:9B59B6,100:C084FC&height=100&section=footer" alt="footer" width="100%">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:660874,100:73408A&height=100&section=footer" alt="footer" width="100%">

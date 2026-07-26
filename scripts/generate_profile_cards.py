@@ -34,17 +34,21 @@ FEATURED_REPOS = [
     "ICCV-2025-WSI-papers",
 ]
 
-# Tsinghua purple palette (rich multi-stop gradients)
-PURPLE_DEEP = "#1A0530"
-PURPLE_DARK = "#3D0A4A"
+# Unified Tsinghua purple — same surface tone across all sections
 PURPLE = "#660874"
-PURPLE_MID = "#82318E"
-PURPLE_SOFT = "#9B59B6"
-PURPLE_LIGHT = "#C084FC"
-PURPLE_PALE = "#F3E8FF"
-PURPLE_INK = "#3D0A4A"
-PURPLE_MUTED = "#6B4E78"
+PURPLE_SOFT = "#73408A"  # slight sibling for gentle sheen only (same depth family)
+TEXT = "#FFFFFF"
+TEXT_SOFT = "#F3E8FF"
 GOLD = "#F5D76E"
+SURFACE = PURPLE  # shared fill for header / about / stats / langs / pins
+
+
+def shared_surface_gradient(gid: str = "surface") -> str:
+    """One shared gradient definition so sections do not read as different purple depths."""
+    return f"""<linearGradient id="{gid}" x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%" stop-color="{SURFACE}"/>
+  <stop offset="100%" stop-color="{PURPLE_SOFT}"/>
+</linearGradient>"""
 
 
 def api_get(url: str) -> Any:
@@ -164,12 +168,12 @@ def render_stats_svg(
     """Dark neon dashboard — looks flashy even before animations finish."""
     width, height = 520, 300
     tiles = [
-        ("Forks", total_forks, "#C084FC"),
-        ("Repos", public_repos, "#E9D5FF"),
-        ("Followers", followers, "#F0ABFC"),
-        ("PRs", prs, "#D8B4FE"),
-        ("Issues", issues, "#A78BFA"),
-        ("Stars", total_stars, "#FDE68A"),
+        ("Forks", total_forks, TEXT_SOFT),
+        ("Repos", public_repos, TEXT_SOFT),
+        ("Followers", followers, TEXT_SOFT),
+        ("PRs", prs, TEXT_SOFT),
+        ("Issues", issues, TEXT_SOFT),
+        ("Stars", total_stars, GOLD),
     ]
     star_steps = count_up_steps(total_stars, steps=9)
     step_dur = 0.14
@@ -179,7 +183,7 @@ def render_stats_svg(
         start = idx * step_dur
         if idx < len(star_steps) - 1:
             star_frames.append(
-                f'<text text-anchor="middle" x="132" y="168" fill="#FDE68A" '
+                f'<text text-anchor="middle" x="132" y="168" fill="{GOLD}" '
                 f'font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="52" font-weight="800" opacity="0">'
                 f"{escape(compact(value))}"
                 f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.88;1" '
@@ -188,7 +192,7 @@ def render_stats_svg(
             )
         else:
             star_frames.append(
-                f'<text text-anchor="middle" x="132" y="168" fill="#FDE68A" '
+                f'<text text-anchor="middle" x="132" y="168" fill="{GOLD}" '
                 f'font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="52" font-weight="800" opacity="0" '
                 f'filter="url(#goldGlow)">'
                 f"{escape(compact(value))}"
@@ -205,10 +209,11 @@ def render_stats_svg(
         delay = 1.1 + i * 0.1
         tile_svg.append(
             f'<g transform="translate({x},{y})">'
-            f'<rect width="105" height="58" rx="12" fill="#2A1038" stroke="{color}" stroke-width="1.2" opacity="0">'
+            f'<rect width="105" height="58" rx="12" fill="#FFFFFF" fill-opacity="0.10" '
+            f'stroke="#FFFFFF" stroke-opacity="0.28" stroke-width="1.2" opacity="0">'
             f'<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="{delay:.2f}s" fill="freeze"/>'
             f"</rect>"
-            f'<text x="12" y="22" fill="#C4B5D4" font-family="Segoe UI, Ubuntu, Sans-Serif" '
+            f'<text x="12" y="22" fill="{TEXT_SOFT}" font-family="Segoe UI, Ubuntu, Sans-Serif" '
             f'font-size="11" font-weight="600" opacity="0">{escape(label)}'
             f'<animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="{delay + 0.1:.2f}s" fill="freeze"/>'
             f"</text>"
@@ -216,7 +221,7 @@ def render_stats_svg(
             f'font-size="20" font-weight="800" opacity="0">{escape(compact(value))}'
             f'<animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="{delay + 0.18:.2f}s" fill="freeze"/>'
             f"</text>"
-            f'<rect x="0" y="56" width="0" height="2" rx="1" fill="{color}">'
+            f'<rect x="0" y="56" width="0" height="2" rx="1" fill="#FFFFFF" fill-opacity="0.55">'
             f'<animate attributeName="width" from="0" to="105" dur="0.7s" begin="{delay:.2f}s" fill="freeze" '
             f'calcMode="spline" keySplines="0.22 1 0.36 1"/>'
             f"</rect>"
@@ -225,60 +230,40 @@ def render_stats_svg(
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{escape(USERNAME)} GitHub stats">
 <defs>
-  <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}"/>
-    <stop offset="45%" stop-color="#2A0B3D"/>
-    <stop offset="100%" stop-color="{PURPLE}"/>
-  </linearGradient>
-  <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="{PURPLE_MID}"/>
-    <stop offset="100%" stop-color="{PURPLE_DEEP}"/>
-  </linearGradient>
-  <radialGradient id="aura" cx="35%" cy="45%" r="55%">
-    <stop offset="0%" stop-color="{PURPLE_LIGHT}" stop-opacity="0.55"/>
-    <stop offset="100%" stop-color="{PURPLE_DEEP}" stop-opacity="0"/>
-  </radialGradient>
+  {shared_surface_gradient("bg")}
   <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
     <feGaussianBlur stdDeviation="3" result="b"/>
-    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
-  <filter id="neon" x="-40%" y="-40%" width="180%" height="180%">
-    <feGaussianBlur stdDeviation="2.5" result="b"/>
     <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
   </filter>
 </defs>
 
 <rect width="{width}" height="{height}" rx="18" fill="url(#bg)"/>
-<rect width="{width}" height="{height}" rx="18" fill="url(#aura)"/>
-<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="17" fill="none" stroke="#A855F7" stroke-opacity="0.55">
-  <animate attributeName="stroke-opacity" values="0.35;0.85;0.35" dur="2.8s" repeatCount="indefinite"/>
-</rect>
+<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="17" fill="none" stroke="#FFFFFF" stroke-opacity="0.22"/>
 
-<text x="22" y="34" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="700">
+<text x="22" y="34" fill="{TEXT}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="700">
   {escape(USERNAME)} · Research Dashboard
 </text>
-<text x="22" y="52" fill="#A78BFA" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="11" font-weight="600">
-  Tsinghua Purple · Live GitHub Metrics
+<text x="22" y="52" fill="{TEXT_SOFT}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="11" font-weight="600">
+  Live GitHub Metrics
 </text>
 
 <!-- STAR CORE -->
 <g transform="translate(20, 68)">
-  <rect width="230" height="200" rx="16" fill="url(#panel)" stroke="#C084FC" stroke-opacity="0.45"/>
-  <circle cx="115" cy="100" r="78" fill="none" stroke="#FDE68A" stroke-width="2" stroke-dasharray="8 10" opacity="0.7">
+  <rect width="230" height="200" rx="16" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.25"/>
+  <circle cx="115" cy="100" r="78" fill="none" stroke="{GOLD}" stroke-width="2" stroke-dasharray="8 10" opacity="0.75">
     <animateTransform attributeName="transform" type="rotate" from="0 115 100" to="360 115 100" dur="14s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="115" cy="100" r="62" fill="none" stroke="#A855F7" stroke-width="3" stroke-linecap="round"
-          stroke-dasharray="390" stroke-dashoffset="390">
+  <circle cx="115" cy="100" r="62" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"
+          stroke-dasharray="390" stroke-dashoffset="390" stroke-opacity="0.7">
     <animate attributeName="stroke-dashoffset" from="390" to="70" dur="1.6s" fill="freeze"
              calcMode="spline" keySplines="0.22 1 0.36 1"/>
-    <animate attributeName="stroke-opacity" values="0.55;1;0.55" dur="2s" begin="1.6s" repeatCount="indefinite"/>
   </circle>
   <polygon points="115,48 122,72 148,72 127,88 135,114 115,98 95,114 103,88 82,72 108,72"
-           fill="#FDE68A" filter="url(#goldGlow)">
+           fill="{GOLD}" filter="url(#goldGlow)">
     <animate attributeName="opacity" values="0.75;1;0.75" dur="1.5s" repeatCount="indefinite"/>
   </polygon>
   {"".join(star_frames)}
-  <text text-anchor="middle" x="115" y="192" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif"
+  <text text-anchor="middle" x="115" y="192" fill="{TEXT_SOFT}" font-family="Segoe UI, Ubuntu, Sans-Serif"
         font-size="13" font-weight="700">TOTAL STARS</text>
 </g>
 
@@ -294,15 +279,14 @@ def render_langs_svg(lang_counts: list[tuple[str, int]], limit: int = 8) -> str:
 
     total = sum(c for _, c in items) or 1
     width, height = 420, 300
+    # Keep accents in one family (white / soft lilac / gold), not multi-depth purples.
     palette = [
-        "#A855F7",
-        "#C084FC",
-        "#E879F9",
-        "#F0ABFC",
-        "#D8B4FE",
-        "#7C3AED",
-        "#FDE68A",
-        "#F5D0FE",
+        "#FFFFFF",
+        "#F3E8FF",
+        "#E9D5FF",
+        GOLD,
+        "#FFFFFF",
+        "#F3E8FF",
     ]
 
     # Donut segments via stroke-dasharray on circles (SMIL draw-in).
@@ -340,11 +324,11 @@ def render_langs_svg(lang_counts: list[tuple[str, int]], limit: int = 8) -> str:
             f'<g opacity="0">'
             f'<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="{delay:.2f}s" fill="freeze"/>'
             f'<circle cx="250" cy="{y - 4}" r="5" fill="{color}"/>'
-            f'<text x="264" y="{y}" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif" '
+            f'<text x="264" y="{y}" fill="{TEXT}" font-family="Segoe UI, Ubuntu, Sans-Serif" '
             f'font-size="13" font-weight="700">{escape(lang)}</text>'
-            f'<text x="390" y="{y}" text-anchor="end" fill="{color}" font-family="Segoe UI, Ubuntu, Sans-Serif" '
+            f'<text x="390" y="{y}" text-anchor="end" fill="{TEXT_SOFT}" font-family="Segoe UI, Ubuntu, Sans-Serif" '
             f'font-size="13" font-weight="800">{pct:.1f}%</text>'
-            f'<rect x="250" y="{y + 8}" width="140" height="5" rx="2.5" fill="#3B1058"/>'
+            f'<rect x="250" y="{y + 8}" width="140" height="5" rx="2.5" fill="#FFFFFF" fill-opacity="0.15"/>'
             f'<rect x="250" y="{y + 8}" width="0" height="5" rx="2.5" fill="{color}">'
             f'<animate attributeName="width" from="0" to="{bw:.1f}" dur="0.9s" begin="{delay:.2f}s" fill="freeze" '
             f'calcMode="spline" keySplines="0.22 1 0.36 1"/>'
@@ -357,32 +341,26 @@ def render_langs_svg(lang_counts: list[tuple[str, int]], limit: int = 8) -> str:
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Top Languages">
 <defs>
-  <linearGradient id="langBg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}"/>
-    <stop offset="55%" stop-color="#2A0B3D"/>
-    <stop offset="100%" stop-color="{PURPLE_MID}"/>
-  </linearGradient>
+  {shared_surface_gradient("langBg")}
   <filter id="arcGlow" x="-30%" y="-30%" width="160%" height="160%">
     <feGaussianBlur stdDeviation="1.6" result="b"/>
     <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
   </filter>
 </defs>
 <rect width="{width}" height="{height}" rx="18" fill="url(#langBg)"/>
-<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="17" fill="none" stroke="#C084FC" stroke-opacity="0.5">
-  <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
-</rect>
-<text x="22" y="34" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="700">
+<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="17" fill="none" stroke="#FFFFFF" stroke-opacity="0.22"/>
+<text x="22" y="34" fill="{TEXT}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="700">
   Language Spectrum
 </text>
-<text x="22" y="52" fill="#A78BFA" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="11" font-weight="600">
+<text x="22" y="52" fill="{TEXT_SOFT}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="11" font-weight="600">
   Byte-weighted stack signal
 </text>
 
 {"".join(arcs)}
-<circle cx="120" cy="150" r="46" fill="#1A0826"/>
-<text text-anchor="middle" x="120" y="144" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif"
+<circle cx="120" cy="150" r="46" fill="{SURFACE}" stroke="#FFFFFF" stroke-opacity="0.2"/>
+<text text-anchor="middle" x="120" y="144" fill="{TEXT}" font-family="Segoe UI, Ubuntu, Sans-Serif"
       font-size="12" font-weight="700">{escape(top_name)}</text>
-<text text-anchor="middle" x="120" y="168" fill="#FDE68A" font-family="Segoe UI, Ubuntu, Sans-Serif"
+<text text-anchor="middle" x="120" y="168" fill="{GOLD}" font-family="Segoe UI, Ubuntu, Sans-Serif"
       font-size="18" font-weight="800">{top_pct:.0f}%</text>
 
 {"".join(legend)}
@@ -404,22 +382,18 @@ def render_repo_card(repo: dict[str, Any]) -> str:
     )
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{escape(name)}">
 <defs>
-  <linearGradient id="pinBg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}"/>
-    <stop offset="55%" stop-color="{PURPLE}"/>
-    <stop offset="100%" stop-color="{PURPLE_SOFT}"/>
-  </linearGradient>
+  {shared_surface_gradient("pinBg")}
 </defs>
 <style>
-  .name {{ font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #FFFFFF; }}
-  .desc {{ font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #E9D5FF; }}
-  .meta {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F3E8FF; }}
+  .name {{ font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: {TEXT}; }}
+  .desc {{ font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {TEXT_SOFT}; }}
+  .meta {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {TEXT_SOFT}; }}
   .star-meta {{ font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {GOLD}; }}
 </style>
-<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" fill="url(#pinBg)" stroke="#E9D5FF" stroke-opacity="0.35"/>
+<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" fill="url(#pinBg)" stroke="#FFFFFF" stroke-opacity="0.22"/>
 <text class="name" x="18" y="30">{escape(name)}</text>
 {desc_svg}
-<circle cx="24" cy="96" r="4" fill="{PURPLE_LIGHT}"/>
+<circle cx="24" cy="96" r="4" fill="#FFFFFF"/>
 <text class="meta" x="34" y="100">{escape(language)}</text>
 <text class="star-meta" x="150" y="100">★ {escape(compact(stars))}</text>
 <text class="meta" x="230" y="100">fork {escape(compact(forks))}</text>
@@ -445,7 +419,7 @@ def render_header_svg() -> str:
         c = (i + 0.92) / n
         d = (i + 1) / n
         frames.append(
-            f'<text text-anchor="middle" x="{width / 2:.0f}" y="118" fill="#F3E8FF" '
+            f'<text text-anchor="middle" x="{width / 2:.0f}" y="118" fill="{TEXT_SOFT}" '
             f'font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="20" font-weight="600" opacity="0">'
             f"{escape(line)}"
             f'<animate attributeName="opacity" values="0;0;1;1;0;0" '
@@ -455,47 +429,22 @@ def render_header_svg() -> str:
         )
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Xitong Ling">
 <defs>
-  <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}">
-      <animate attributeName="stop-color" values="{PURPLE_DEEP};{PURPLE_DARK};{PURPLE_DEEP}" dur="8s" repeatCount="indefinite"/>
-    </stop>
-    <stop offset="35%" stop-color="{PURPLE}">
-      <animate attributeName="stop-color" values="{PURPLE};{PURPLE_MID};{PURPLE}" dur="8s" repeatCount="indefinite"/>
-    </stop>
-    <stop offset="70%" stop-color="{PURPLE_SOFT}">
-      <animate attributeName="stop-color" values="{PURPLE_SOFT};{PURPLE_LIGHT};{PURPLE_SOFT}" dur="8s" repeatCount="indefinite"/>
-    </stop>
-    <stop offset="100%" stop-color="#D8B4FE"/>
-  </linearGradient>
-  <linearGradient id="waveFill" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}" stop-opacity="0.05"/>
-    <stop offset="100%" stop-color="{PURPLE_DEEP}" stop-opacity="0.45"/>
-  </linearGradient>
-  <radialGradient id="glowA" cx="20%" cy="30%" r="40%">
-    <stop offset="0%" stop-color="{PURPLE_LIGHT}" stop-opacity="0.45"/>
-    <stop offset="100%" stop-color="{PURPLE_LIGHT}" stop-opacity="0"/>
-  </radialGradient>
-  <radialGradient id="glowB" cx="85%" cy="20%" r="35%">
-    <stop offset="0%" stop-color="{GOLD}" stop-opacity="0.22"/>
-    <stop offset="100%" stop-color="{GOLD}" stop-opacity="0"/>
-  </radialGradient>
+  {shared_surface_gradient("heroBg")}
 </defs>
 <rect width="{width}" height="{height}" fill="url(#heroBg)"/>
-<rect width="{width}" height="{height}" fill="url(#glowA)"/>
-<rect width="{width}" height="{height}" fill="url(#glowB)"/>
-<circle cx="980" cy="30" r="120" fill="#ffffff" fill-opacity="0.07">
+<circle cx="980" cy="30" r="120" fill="#ffffff" fill-opacity="0.08">
   <animate attributeName="cy" values="30;48;30" dur="5s" repeatCount="indefinite"/>
 </circle>
 <circle cx="80" cy="160" r="90" fill="#ffffff" fill-opacity="0.06">
   <animate attributeName="cx" values="80;110;80" dur="6s" repeatCount="indefinite"/>
 </circle>
-<path d="M0,155 C180,130 320,185 520,160 C740,130 900,175 1100,150 L1100,200 L0,200 Z" fill="url(#waveFill)">
+<path d="M0,155 C180,130 320,185 520,160 C740,130 900,175 1100,150 L1100,200 L0,200 Z" fill="#FFFFFF" fill-opacity="0.08">
   <animateTransform attributeName="transform" type="translate" values="0 0; -40 0; 0 0" dur="8s" repeatCount="indefinite"/>
 </path>
-<text text-anchor="middle" x="{width / 2:.0f}" y="72" fill="#FFFFFF"
+<text text-anchor="middle" x="{width / 2:.0f}" y="72" fill="{TEXT}"
       font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="44" font-weight="800">Xitong Ling</text>
 {"".join(frames)}
-<text text-anchor="middle" x="{width / 2:.0f}" y="168" fill="#F3E8FF"
+<text text-anchor="middle" x="{width / 2:.0f}" y="168" fill="{TEXT_SOFT}"
       font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="14" font-weight="600">
   PhD Student · Representation Learning · AI4Healthcare
 </text>
@@ -516,76 +465,25 @@ def render_about_card() -> str:
     ]
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="About Xitong Ling">
 <defs>
-  <linearGradient id="aboutBg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}"/>
-    <stop offset="40%" stop-color="{PURPLE}"/>
-    <stop offset="75%" stop-color="{PURPLE_MID}"/>
-    <stop offset="100%" stop-color="{PURPLE_LIGHT}"/>
-  </linearGradient>
-  <linearGradient id="aboutSheen" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="45%" stop-color="#ffffff" stop-opacity="0.18"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-  </linearGradient>
+  {shared_surface_gradient("aboutBg")}
 </defs>
 <rect width="{width}" height="{height}" rx="14" fill="url(#aboutBg)"/>
-<rect x="-160" y="0" width="160" height="{height}" fill="#ffffff" opacity="0.12">
+<rect x="-160" y="0" width="160" height="{height}" fill="#ffffff" opacity="0.10">
   <animateTransform attributeName="transform" type="translate" values="0 0;1260 0" dur="4.8s" repeatCount="indefinite"/>
 </rect>
 <rect x="0" y="0" width="8" height="{height}" fill="{GOLD}">
   <animate attributeName="opacity" values="0.55;1;0.55" dur="2s" repeatCount="indefinite"/>
 </rect>
-<text x="36" y="42" fill="#FFFFFF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="26" font-weight="800">Xitong Ling</text>
-<text x="36" y="72" fill="#F3E8FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="600">PhD Student | Tsinghua University (SIGS)</text>
-<text x="36" y="96" fill="#EDE0F5" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="13" font-weight="500">Building representation learning systems for computational pathology & healthcare AI · Open to collaboration</text>
+<text x="36" y="42" fill="{TEXT}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="26" font-weight="800">Xitong Ling</text>
+<text x="36" y="72" fill="{TEXT_SOFT}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="600">PhD Student | Tsinghua University (SIGS)</text>
+<text x="36" y="96" fill="{TEXT_SOFT}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="13" font-weight="500">Building representation learning systems for computational pathology & healthcare AI · Open to collaboration</text>
 {"".join(
     f'<g>'
-    f'<rect x="{x}" y="{y}" width="{w}" height="28" rx="14" fill="#F8F0FF"/>'
-    f'<text x="{x + 12}" y="{y + 18}" fill="{PURPLE_INK}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">{label}</text>'
+    f'<rect x="{x}" y="{y}" width="{w}" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.92"/>'
+    f'<text x="{x + 12}" y="{y + 18}" fill="{PURPLE}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">{label}</text>'
     f"</g>"
     for label, x, y, w in chips
 )}
-</svg>
-"""
-
-
-def render_focus_svg() -> str:
-    """Four research pillars in one gradient strip."""
-    width, height = 1100, 150
-    pillars = [
-        ("01", "Representation Learning", "Self-supervised & foundation features"),
-        ("02", "Computational Pathology", "MIL / WSI / weakly supervised analysis"),
-        ("03", "Multimodal Medical AI", "Vision-language & cross-modal fusion"),
-        ("04", "Open Research Tools", "Baselines, benchmarks & curated lists"),
-    ]
-    card_w = 250
-    gap = 16
-    start_x = 24
-    blocks = []
-    for i, (idx, title, desc) in enumerate(pillars):
-        x = start_x + i * (card_w + gap)
-        blocks.append(
-            f'<g transform="translate({x},28)">'
-            f'<rect width="{card_w}" height="96" rx="14" fill="#2A0B3D" fill-opacity="0.55" '
-            f'stroke="#E9D5FF" stroke-opacity="0.35"/>'
-            f'<text x="16" y="28" fill="{GOLD}" font-family="Segoe UI, Ubuntu, Sans-Serif" '
-            f'font-size="13" font-weight="800">{idx}</text>'
-            f'<text x="16" y="54" fill="#FFFFFF" font-family="Segoe UI, Ubuntu, Sans-Serif" '
-            f'font-size="14" font-weight="700">{escape(title)}</text>'
-            f'<text x="16" y="76" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif" '
-            f'font-size="11" font-weight="500">{escape(desc)}</text>'
-            f"</g>"
-        )
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Research Focus">
-<defs>
-  <linearGradient id="focusBg" x1="0%" y1="0%" x2="100%" y2="0%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}"/>
-    <stop offset="50%" stop-color="{PURPLE}"/>
-    <stop offset="100%" stop-color="{PURPLE_SOFT}"/>
-  </linearGradient>
-</defs>
-<rect width="{width}" height="{height}" rx="14" fill="url(#focusBg)"/>
-{"".join(blocks)}
 </svg>
 """
 
@@ -610,7 +508,6 @@ def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     header_path = OUT_DIR / "header.svg"
     about_path = OUT_DIR / "about.svg"
-    focus_path = OUT_DIR / "focus.svg"
     stats_path = OUT_DIR / "stats.svg"
     langs_path = OUT_DIR / "top-langs.svg"
     # Versioned filenames bust GitHub/camo image cache after redesigns.
@@ -619,7 +516,6 @@ def main() -> int:
 
     header_path.write_text(render_header_svg(), encoding="utf-8")
     about_path.write_text(render_about_card(), encoding="utf-8")
-    focus_path.write_text(render_focus_svg(), encoding="utf-8")
     stats_svg = render_stats_svg(
         total_stars=total_stars,
         total_forks=total_forks,
@@ -645,9 +541,13 @@ def main() -> int:
         path.write_text(render_repo_card(repo), encoding="utf-8")
         print(f"Wrote {path}")
 
+    # Remove retired assets if present.
+    focus_path = OUT_DIR / "focus.svg"
+    if focus_path.exists():
+        focus_path.unlink()
+
     print(f"Wrote {header_path}")
     print(f"Wrote {about_path}")
-    print(f"Wrote {focus_path}")
     print(f"Wrote {stats_path} / {stats_v_path} (stars={total_stars})")
     print(f"Wrote {langs_path} / {langs_v_path} (langs={len(lang_counter)})")
     return 0
