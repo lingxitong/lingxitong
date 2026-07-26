@@ -434,67 +434,96 @@ def render_repo_card(repo: dict[str, Any]) -> str:
 """
 
 
-def render_about_card() -> str:
-    """Identity card (replaces the old Python dict code block)."""
-    width, height = 720, 230
-    chips = [
-        ("PhD Student", 18, 168, 118),
-        ("Representation Learning", 148, 168, 188),
-        ("AI4Healthcare", 348, 168, 128),
+def render_header_svg() -> str:
+    """Full-bleed hero banner (avoids narrow third-party capsule widgets)."""
+    width, height = 1100, 200
+    lines = [
+        "PhD Student @ Tsinghua University",
+        "Representation Learning",
+        "AI4Healthcare",
+        "Computational Pathology & Medical AI",
     ]
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="About Xitong Ling">
+    frames = []
+    n = len(lines)
+    for i, line in enumerate(lines):
+        # Full-period loop so lines take turns without overlapping forever.
+        a = i / n
+        b = (i + 0.08) / n
+        c = (i + 0.92) / n
+        d = (i + 1) / n
+        frames.append(
+            f'<text text-anchor="middle" x="{width / 2:.0f}" y="118" fill="#F3E8FF" '
+            f'font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="20" font-weight="600" opacity="0">'
+            f"{escape(line)}"
+            f'<animate attributeName="opacity" values="0;0;1;1;0;0" '
+            f'keyTimes="0;{a:.3f};{b:.3f};{c:.3f};{d:.3f};1" '
+            f'dur="12.8s" repeatCount="indefinite"/>'
+            f"</text>"
+        )
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Xitong Ling">
 <defs>
-  <linearGradient id="aboutBg" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%" stop-color="#4A0A5C"/>
+  <linearGradient id="heroBg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2A0840"/>
     <stop offset="45%" stop-color="{PURPLE}"/>
-    <stop offset="100%" stop-color="{PURPLE_MID}"/>
+    <stop offset="100%" stop-color="#9B59B6"/>
   </linearGradient>
-  <linearGradient id="aboutSheen" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+  <linearGradient id="waveFill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#12061A" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#12061A" stop-opacity="0.55"/>
   </linearGradient>
 </defs>
-<style>
-  .name {{ font: 700 28px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; animation: fadeDown 0.7s ease both; }}
-  .role {{ font: 600 14px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F3E8FF; animation: fadeDown 0.7s ease both 0.1s; }}
-  .row {{ font: 500 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #EDE0F5; animation: fadeDown 0.7s ease both 0.2s; }}
-  .chip {{ font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_INK}; }}
-  .orb {{ animation: float 4.5s ease-in-out infinite; }}
-  .orb2 {{ animation: float 5.5s ease-in-out infinite reverse; }}
-  .chip-g {{ opacity: 0; animation: chipIn 0.55s ease forwards; }}
-  @keyframes fadeDown {{
-    from {{ opacity: 0; transform: translateY(-8px); }}
-    to {{ opacity: 1; transform: translateY(0); }}
-  }}
-  @keyframes float {{
-    0%, 100% {{ transform: translateY(0); }}
-    50% {{ transform: translateY(-10px); }}
-  }}
-  @keyframes chipIn {{
-    from {{ opacity: 0; transform: translateY(8px); }}
-    to {{ opacity: 1; transform: translateY(0); }}
-  }}
-  @keyframes sweep {{
-    0% {{ transform: translateX(-180px); opacity: 0; }}
-    30% {{ opacity: 0.25; }}
-    100% {{ transform: translateX(760px); opacity: 0; }}
-  }}
-  .sweep {{ animation: sweep 3.2s ease-in-out infinite; }}
-</style>
-<rect x="0" y="0" width="{width}" height="{height}" rx="16" fill="url(#aboutBg)"/>
-<rect class="sweep" x="0" y="0" width="120" height="{height}" fill="#ffffff" opacity="0.2"/>
-<circle class="orb" cx="640" cy="36" r="70" fill="#ffffff" fill-opacity="0.06"/>
-<circle class="orb2" cx="680" cy="180" r="90" fill="#ffffff" fill-opacity="0.05"/>
-<text class="name" x="28" y="48">Xitong Ling</text>
-<text class="role" x="28" y="76">PhD Student | Tsinghua University (SIGS)</text>
-<text class="row" x="28" y="112">Beihang University  -&gt;  Tsinghua University</text>
-<text class="row" x="28" y="134" style="animation-delay:0.28s">Homepage: lingxitong.github.io</text>
+<rect width="{width}" height="{height}" fill="url(#heroBg)"/>
+<circle cx="980" cy="30" r="120" fill="#ffffff" fill-opacity="0.06">
+  <animate attributeName="cy" values="30;48;30" dur="5s" repeatCount="indefinite"/>
+</circle>
+<circle cx="80" cy="160" r="90" fill="#ffffff" fill-opacity="0.05">
+  <animate attributeName="cx" values="80;110;80" dur="6s" repeatCount="indefinite"/>
+</circle>
+<path d="M0,155 C180,130 320,185 520,160 C740,130 900,175 1100,150 L1100,200 L0,200 Z" fill="url(#waveFill)">
+  <animateTransform attributeName="transform" type="translate" values="0 0; -40 0; 0 0" dur="8s" repeatCount="indefinite"/>
+</path>
+<text text-anchor="middle" x="{width / 2:.0f}" y="72" fill="#FFFFFF"
+      font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="44" font-weight="800">Xitong Ling</text>
+{"".join(frames)}
+<text text-anchor="middle" x="{width / 2:.0f}" y="168" fill="#E9D5FF"
+      font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="14" font-weight="600">
+  PhD Student · Representation Learning · AI4Healthcare
+</text>
+</svg>
+"""
+
+
+def render_about_card() -> str:
+    """Wide identity strip — fills README content width."""
+    width, height = 1100, 168
+    chips = [
+        ("PhD Student", 36, 118, 120),
+        ("Representation Learning", 172, 118, 200),
+        ("AI4Healthcare", 388, 118, 130),
+        ("Tsinghua SIGS", 534, 118, 120),
+        ("Beihang -> Tsinghua", 670, 118, 160),
+    ]
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="About Xitong Ling">
+<defs>
+  <linearGradient id="aboutBg" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#2A0840"/>
+    <stop offset="50%" stop-color="{PURPLE}"/>
+    <stop offset="100%" stop-color="{PURPLE_MID}"/>
+  </linearGradient>
+</defs>
+<rect width="{width}" height="{height}" rx="14" fill="url(#aboutBg)"/>
+<rect x="0" y="0" width="8" height="{height}" fill="#FDE68A">
+  <animate attributeName="opacity" values="0.55;1;0.55" dur="2s" repeatCount="indefinite"/>
+</rect>
+<text x="36" y="42" fill="#FFFFFF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="26" font-weight="800">Xitong Ling</text>
+<text x="36" y="72" fill="#F3E8FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="600">PhD Student | Tsinghua University (SIGS)</text>
+<text x="36" y="96" fill="#EDE0F5" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="13" font-weight="500">Research: Representation Learning / AI4Healthcare · Homepage: lingxitong.github.io · Email: lingxt23@mails.tsinghua.edu.cn</text>
 {"".join(
-    f'<g class="chip-g" style="animation-delay:{0.35 + i * 0.12:.2f}s">'
+    f'<g>'
     f'<rect x="{x}" y="{y}" width="{w}" height="28" rx="14" fill="#F8F0FF"/>'
-    f'<text class="chip" x="{x + 14}" y="{y + 18}">{label}</text>'
+    f'<text x="{x + 12}" y="{y + 18}" fill="{PURPLE_INK}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">{label}</text>'
     f"</g>"
-    for i, (label, x, y, w) in enumerate(chips)
+    for label, x, y, w in chips
 )}
 </svg>
 """
@@ -518,6 +547,7 @@ def main() -> int:
     issues = fetch_count(f"author:{USERNAME} type:issue")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    header_path = OUT_DIR / "header.svg"
     about_path = OUT_DIR / "about.svg"
     stats_path = OUT_DIR / "stats.svg"
     langs_path = OUT_DIR / "top-langs.svg"
@@ -525,6 +555,7 @@ def main() -> int:
     stats_v_path = OUT_DIR / "stats-neon.svg"
     langs_v_path = OUT_DIR / "langs-neon.svg"
 
+    header_path.write_text(render_header_svg(), encoding="utf-8")
     about_path.write_text(render_about_card(), encoding="utf-8")
     stats_svg = render_stats_svg(
         total_stars=total_stars,
@@ -551,6 +582,7 @@ def main() -> int:
         path.write_text(render_repo_card(repo), encoding="utf-8")
         print(f"Wrote {path}")
 
+    print(f"Wrote {header_path}")
     print(f"Wrote {about_path}")
     print(f"Wrote {stats_path} / {stats_v_path} (stars={total_stars})")
     print(f"Wrote {langs_path} / {langs_v_path} (langs={len(lang_counter)})")

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="200" viewBox="0 0 1100 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Xitong Ling">
+<defs>
+  <linearGradient id="heroBg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2A0840"/>
+    <stop offset="45%" stop-color="#660874"/>
+    <stop offset="100%" stop-color="#9B59B6"/>
+  </linearGradient>
+  <linearGradient id="waveFill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#12061A" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#12061A" stop-opacity="0.55"/>
+  </linearGradient>
+</defs>
+<rect width="1100" height="200" fill="url(#heroBg)"/>
+<circle cx="980" cy="30" r="120" fill="#ffffff" fill-opacity="0.06">
+  <animate attributeName="cy" values="30;48;30" dur="5s" repeatCount="indefinite"/>
+</circle>
+<circle cx="80" cy="160" r="90" fill="#ffffff" fill-opacity="0.05">
+  <animate attributeName="cx" values="80;110;80" dur="6s" repeatCount="indefinite"/>
+</circle>
+<path d="M0,155 C180,130 320,185 520,160 C740,130 900,175 1100,150 L1100,200 L0,200 Z" fill="url(#waveFill)">
+  <animateTransform attributeName="transform" type="translate" values="0 0; -40 0; 0 0" dur="8s" repeatCount="indefinite"/>
+</path>
+<text text-anchor="middle" x="550" y="72" fill="#FFFFFF"
+      font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="44" font-weight="800">Xitong Ling</text>
+<text text-anchor="middle" x="550" y="118" fill="#F3E8FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="20" font-weight="600" opacity="0">PhD Student @ Tsinghua University<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.000;0.020;0.230;0.250;1" dur="12.8s" repeatCount="indefinite"/></text><text text-anchor="middle" x="550" y="118" fill="#F3E8FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="20" font-weight="600" opacity="0">Representation Learning<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.250;0.270;0.480;0.500;1" dur="12.8s" repeatCount="indefinite"/></text><text text-anchor="middle" x="550" y="118" fill="#F3E8FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="20" font-weight="600" opacity="0">AI4Healthcare<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.520;0.730;0.750;1" dur="12.8s" repeatCount="indefinite"/></text><text text-anchor="middle" x="550" y="118" fill="#F3E8FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="20" font-weight="600" opacity="0">Computational Pathology &amp; Medical AI<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.750;0.770;0.980;1.000;1" dur="12.8s" repeatCount="indefinite"/></text>
+<text text-anchor="middle" x="550" y="168" fill="#E9D5FF"
+      font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="14" font-weight="600">
+  PhD Student · Representation Learning · AI4Healthcare
+</text>
+</svg>
