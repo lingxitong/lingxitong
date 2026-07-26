@@ -25,11 +25,11 @@
 <h3>📊 GitHub Stats</h3>
 
 <p align="center">
-  <img src="./profile/stats.svg" alt="Xitong Ling's GitHub Stats" width="520">
+  <img src="./profile/stats.svg" alt="Xitong Ling's GitHub Stats" width="420">
 </p>
 
 <p align="center">
-  <img src="./profile/top-langs.svg" alt="Top Languages" width="420">
+  <img src="./profile/top-langs.svg" alt="Top Languages" width="360">
 </p>
 
 <br>

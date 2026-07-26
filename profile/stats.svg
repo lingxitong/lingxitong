@@ -1,15 +1,28 @@
-
-    <svg width="576.5"  height="120" viewBox="0 0 576.5 120" fill="#ffffff00" xmlns="http://www.w3.org/2000/svg">
-    <style>
-    .text { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #006AFF }
-    .small { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #417E87 }
-    .gray { fill: #858585 }
-    </style>
-    <rect x="0.5" y="0.5" width="575.5" height="99%" rx="4.5" fill="#ffffff00" stroke="#e4e2e2"/>
-    <text x="25" y="45" class="text">Something went wrong! file an issue at https://tiny.one/readme-stats</text>
-    <text data-testid="message" x="25" y="55" class="text small">
-      <tspan x="25" dy="18">Resource not accessible by integration</tspan>
-      <tspan x="25" dy="18" class="gray">OK</tspan>
-    </text>
-    </svg>
-  
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="232" viewBox="0 0 420 232" role="img" aria-label="lingxitong GitHub stats">
+<style>
+  .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }
+  .label { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }
+  .value { font: 700 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #24292f; }
+  .card { fill: #ffffff; stroke: #d0d7de; }
+</style>
+<rect class="card" x="0.5" y="0.5" width="419" height="231" rx="8"/>
+<text class="title" x="20" y="30">lingxitong's GitHub Stats</text>
+<circle cx="28" cy="54" r="4" fill="#ffcb2f"/>
+<text class="label" x="42" y="58">Total Stars</text>
+<text class="value" x="396" y="58" text-anchor="end">795</text>
+<circle cx="28" cy="82" r="4" fill="#40c463"/>
+<text class="label" x="42" y="86">Total Forks</text>
+<text class="value" x="396" y="86" text-anchor="end">58</text>
+<circle cx="28" cy="110" r="4" fill="#79c0ff"/>
+<text class="label" x="42" y="114">Public Repos</text>
+<text class="value" x="396" y="114" text-anchor="end">83</text>
+<circle cx="28" cy="138" r="4" fill="#f778ba"/>
+<text class="label" x="42" y="142">Followers</text>
+<text class="value" x="396" y="142" text-anchor="end">103</text>
+<circle cx="28" cy="166" r="4" fill="#a371f7"/>
+<text class="label" x="42" y="170">Pull Requests</text>
+<text class="value" x="396" y="170" text-anchor="end">14</text>
+<circle cx="28" cy="194" r="4" fill="#ffa657"/>
+<text class="label" x="42" y="198">Issues</text>
+<text class="value" x="396" y="198" text-anchor="end">53</text>
+</svg>
