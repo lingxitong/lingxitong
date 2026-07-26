@@ -1,22 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="400" height="118" viewBox="0 0 400 118" role="img" aria-label="MIL_BASELINE">
 <defs>
-  <linearGradient id="pinBg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="#1A0530"/>
-    <stop offset="55%" stop-color="#660874"/>
+  <linearGradient id="pinStroke" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#660874"/>
     <stop offset="100%" stop-color="#9B59B6"/>
   </linearGradient>
 </defs>
 <style>
-  .name { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #FFFFFF; }
-  .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #E9D5FF; }
-  .meta { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F3E8FF; }
-  .star-meta { font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F5D76E; }
+  .name { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #660874; }
+  .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6B4E78; }
+  .meta { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #3D0A4A; }
+  .star-meta { font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #B8860B; }
+  .card { fill: #FCF8FF; stroke: url(#pinStroke); }
+  .card-body { animation: pinIn 0.7s ease both; }
+  .twinkle { animation: twinkle 1.4s ease-in-out infinite; transform-origin: 156px 96px; }
+  @keyframes pinIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.75; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
 </style>
-<rect x="0.5" y="0.5" width="399" height="117" rx="12" fill="url(#pinBg)" stroke="#E9D5FF" stroke-opacity="0.35"/>
-<text class="name" x="18" y="30">MIL_BASELINE</text>
-<text class="desc" x="18" y="54">A library that integrates different MIL</text><text class="desc" x="18" y="70">methods into a unified framework</text>
-<circle cx="24" cy="96" r="4" fill="#C084FC"/>
-<text class="meta" x="34" y="100">Python</text>
-<text class="star-meta" x="150" y="100">★ 356</text>
-<text class="meta" x="230" y="100">fork 31</text>
+<g class="card-body">
+  <rect class="card" x="0.5" y="0.5" width="399" height="117" rx="8"/>
+  <text class="name" x="18" y="30">MIL_BASELINE</text>
+  <text class="desc" x="18" y="54">A library that integrates different MIL</text><text class="desc" x="18" y="70">methods into a unified framework</text>
+  <circle cx="24" cy="96" r="4" fill="#82318E"/>
+  <text class="meta" x="34" y="100">Python</text>
+  <g class="twinkle">
+    <text class="star-meta" x="150" y="100">★ 356</text>
+  </g>
+  <text class="meta" x="230" y="100">fork 31</text>
+</g>
 </svg>

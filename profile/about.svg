@@ -1,26 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="176" viewBox="0 0 1100 176" preserveAspectRatio="xMidYMid meet" role="img" aria-label="About Xitong Ling">
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="168" viewBox="0 0 1100 168" preserveAspectRatio="xMidYMid meet" role="img" aria-label="About Xitong Ling">
 <defs>
-  <linearGradient id="aboutBg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="#1A0530"/>
-    <stop offset="40%" stop-color="#660874"/>
-    <stop offset="75%" stop-color="#82318E"/>
-    <stop offset="100%" stop-color="#C084FC"/>
-  </linearGradient>
-  <linearGradient id="aboutSheen" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="45%" stop-color="#ffffff" stop-opacity="0.18"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+  <linearGradient id="aboutBg" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#2A0840"/>
+    <stop offset="50%" stop-color="#660874"/>
+    <stop offset="100%" stop-color="#82318E"/>
   </linearGradient>
 </defs>
-<rect width="1100" height="176" rx="14" fill="url(#aboutBg)"/>
-<rect x="-160" y="0" width="160" height="176" fill="#ffffff" opacity="0.12">
-  <animateTransform attributeName="transform" type="translate" values="0 0;1260 0" dur="4.8s" repeatCount="indefinite"/>
-</rect>
-<rect x="0" y="0" width="8" height="176" fill="#F5D76E">
+<rect width="1100" height="168" rx="14" fill="url(#aboutBg)"/>
+<rect x="0" y="0" width="8" height="168" fill="#FDE68A">
   <animate attributeName="opacity" values="0.55;1;0.55" dur="2s" repeatCount="indefinite"/>
 </rect>
 <text x="36" y="42" fill="#FFFFFF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="26" font-weight="800">Xitong Ling</text>
 <text x="36" y="72" fill="#F3E8FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="600">PhD Student | Tsinghua University (SIGS)</text>
-<text x="36" y="96" fill="#EDE0F5" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="13" font-weight="500">Building representation learning systems for computational pathology & healthcare AI · Open to collaboration</text>
-<g><rect x="36" y="124" width="120" height="28" rx="14" fill="#F8F0FF"/><text x="48" y="142" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">PhD Student</text></g><g><rect x="172" y="124" width="200" height="28" rx="14" fill="#F8F0FF"/><text x="184" y="142" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">Representation Learning</text></g><g><rect x="388" y="124" width="130" height="28" rx="14" fill="#F8F0FF"/><text x="400" y="142" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">AI4Healthcare</text></g><g><rect x="534" y="124" width="120" height="28" rx="14" fill="#F8F0FF"/><text x="546" y="142" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">Tsinghua SIGS</text></g><g><rect x="670" y="124" width="160" height="28" rx="14" fill="#F8F0FF"/><text x="682" y="142" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">Beihang -> Tsinghua</text></g><g><rect x="846" y="124" width="110" height="28" rx="14" fill="#F8F0FF"/><text x="858" y="142" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">Open Source</text></g>
+<text x="36" y="96" fill="#EDE0F5" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="13" font-weight="500">Research: Representation Learning / AI4Healthcare · Homepage: lingxitong.github.io · Email: lingxt23@mails.tsinghua.edu.cn</text>
+<g><rect x="36" y="118" width="120" height="28" rx="14" fill="#F8F0FF"/><text x="48" y="136" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">PhD Student</text></g><g><rect x="172" y="118" width="200" height="28" rx="14" fill="#F8F0FF"/><text x="184" y="136" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">Representation Learning</text></g><g><rect x="388" y="118" width="130" height="28" rx="14" fill="#F8F0FF"/><text x="400" y="136" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">AI4Healthcare</text></g><g><rect x="534" y="118" width="120" height="28" rx="14" fill="#F8F0FF"/><text x="546" y="136" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">Tsinghua SIGS</text></g><g><rect x="670" y="118" width="160" height="28" rx="14" fill="#F8F0FF"/><text x="682" y="136" fill="#3D0A4A" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">Beihang -> Tsinghua</text></g>
 </svg>

@@ -30,21 +30,15 @@ FEATURED_REPOS = [
     "Awesome-AI4DigitalPathology",
     "CVPR-2025-WSI-Papers",
     "PFM_Segmentation",
-    "CAMELYON-PLUS-BENCHMARK",
-    "ICCV-2025-WSI-papers",
 ]
 
-# Tsinghua purple palette (rich multi-stop gradients)
-PURPLE_DEEP = "#1A0530"
-PURPLE_DARK = "#3D0A4A"
+# Tsinghua purple palette
 PURPLE = "#660874"
 PURPLE_MID = "#82318E"
 PURPLE_SOFT = "#9B59B6"
-PURPLE_LIGHT = "#C084FC"
-PURPLE_PALE = "#F3E8FF"
+PURPLE_PALE = "#EDE0F5"
 PURPLE_INK = "#3D0A4A"
 PURPLE_MUTED = "#6B4E78"
-GOLD = "#F5D76E"
 
 
 def api_get(url: str) -> Any:
@@ -225,18 +219,18 @@ def render_stats_svg(
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{escape(USERNAME)} GitHub stats">
 <defs>
-  <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}"/>
-    <stop offset="45%" stop-color="#2A0B3D"/>
-    <stop offset="100%" stop-color="{PURPLE}"/>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#12061A"/>
+    <stop offset="50%" stop-color="#1C0A2E"/>
+    <stop offset="100%" stop-color="#2A0B3D"/>
   </linearGradient>
   <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="{PURPLE_MID}"/>
-    <stop offset="100%" stop-color="{PURPLE_DEEP}"/>
+    <stop offset="0%" stop-color="#3B1058"/>
+    <stop offset="100%" stop-color="#1A0826"/>
   </linearGradient>
   <radialGradient id="aura" cx="35%" cy="45%" r="55%">
-    <stop offset="0%" stop-color="{PURPLE_LIGHT}" stop-opacity="0.55"/>
-    <stop offset="100%" stop-color="{PURPLE_DEEP}" stop-opacity="0"/>
+    <stop offset="0%" stop-color="#82318E" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#12061A" stop-opacity="0"/>
   </radialGradient>
   <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
     <feGaussianBlur stdDeviation="3" result="b"/>
@@ -357,10 +351,9 @@ def render_langs_svg(lang_counts: list[tuple[str, int]], limit: int = 8) -> str:
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Top Languages">
 <defs>
-  <linearGradient id="langBg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}"/>
-    <stop offset="55%" stop-color="#2A0B3D"/>
-    <stop offset="100%" stop-color="{PURPLE_MID}"/>
+  <linearGradient id="langBg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#12061A"/>
+    <stop offset="100%" stop-color="#2A0B3D"/>
   </linearGradient>
   <filter id="arcGlow" x="-30%" y="-30%" width="160%" height="160%">
     <feGaussianBlur stdDeviation="1.6" result="b"/>
@@ -404,25 +397,39 @@ def render_repo_card(repo: dict[str, Any]) -> str:
     )
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{escape(name)}">
 <defs>
-  <linearGradient id="pinBg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}"/>
-    <stop offset="55%" stop-color="{PURPLE}"/>
+  <linearGradient id="pinStroke" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="{PURPLE}"/>
     <stop offset="100%" stop-color="{PURPLE_SOFT}"/>
   </linearGradient>
 </defs>
 <style>
-  .name {{ font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #FFFFFF; }}
-  .desc {{ font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #E9D5FF; }}
-  .meta {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F3E8FF; }}
-  .star-meta {{ font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {GOLD}; }}
+  .name {{ font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE}; }}
+  .desc {{ font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_MUTED}; }}
+  .meta {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_INK}; }}
+  .star-meta {{ font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #B8860B; }}
+  .card {{ fill: #FCF8FF; stroke: url(#pinStroke); }}
+  .card-body {{ animation: pinIn 0.7s ease both; }}
+  .twinkle {{ animation: twinkle 1.4s ease-in-out infinite; transform-origin: 156px 96px; }}
+  @keyframes pinIn {{
+    from {{ opacity: 0; transform: translateY(8px); }}
+    to {{ opacity: 1; transform: translateY(0); }}
+  }}
+  @keyframes twinkle {{
+    0%, 100% {{ opacity: 0.75; transform: scale(1); }}
+    50% {{ opacity: 1; transform: scale(1.15); }}
+  }}
 </style>
-<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" fill="url(#pinBg)" stroke="#E9D5FF" stroke-opacity="0.35"/>
-<text class="name" x="18" y="30">{escape(name)}</text>
-{desc_svg}
-<circle cx="24" cy="96" r="4" fill="{PURPLE_LIGHT}"/>
-<text class="meta" x="34" y="100">{escape(language)}</text>
-<text class="star-meta" x="150" y="100">★ {escape(compact(stars))}</text>
-<text class="meta" x="230" y="100">fork {escape(compact(forks))}</text>
+<g class="card-body">
+  <rect class="card" x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="8"/>
+  <text class="name" x="18" y="30">{escape(name)}</text>
+  {desc_svg}
+  <circle cx="24" cy="96" r="4" fill="{PURPLE_MID}"/>
+  <text class="meta" x="34" y="100">{escape(language)}</text>
+  <g class="twinkle">
+    <text class="star-meta" x="150" y="100">★ {escape(compact(stars))}</text>
+  </g>
+  <text class="meta" x="230" y="100">fork {escape(compact(forks))}</text>
+</g>
 </svg>
 """
 
@@ -455,38 +462,21 @@ def render_header_svg() -> str:
         )
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Xitong Ling">
 <defs>
-  <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}">
-      <animate attributeName="stop-color" values="{PURPLE_DEEP};{PURPLE_DARK};{PURPLE_DEEP}" dur="8s" repeatCount="indefinite"/>
-    </stop>
-    <stop offset="35%" stop-color="{PURPLE}">
-      <animate attributeName="stop-color" values="{PURPLE};{PURPLE_MID};{PURPLE}" dur="8s" repeatCount="indefinite"/>
-    </stop>
-    <stop offset="70%" stop-color="{PURPLE_SOFT}">
-      <animate attributeName="stop-color" values="{PURPLE_SOFT};{PURPLE_LIGHT};{PURPLE_SOFT}" dur="8s" repeatCount="indefinite"/>
-    </stop>
-    <stop offset="100%" stop-color="#D8B4FE"/>
+  <linearGradient id="heroBg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2A0840"/>
+    <stop offset="45%" stop-color="{PURPLE}"/>
+    <stop offset="100%" stop-color="#9B59B6"/>
   </linearGradient>
   <linearGradient id="waveFill" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}" stop-opacity="0.05"/>
-    <stop offset="100%" stop-color="{PURPLE_DEEP}" stop-opacity="0.45"/>
+    <stop offset="0%" stop-color="#12061A" stop-opacity="0.15"/>
+    <stop offset="100%" stop-color="#12061A" stop-opacity="0.55"/>
   </linearGradient>
-  <radialGradient id="glowA" cx="20%" cy="30%" r="40%">
-    <stop offset="0%" stop-color="{PURPLE_LIGHT}" stop-opacity="0.45"/>
-    <stop offset="100%" stop-color="{PURPLE_LIGHT}" stop-opacity="0"/>
-  </radialGradient>
-  <radialGradient id="glowB" cx="85%" cy="20%" r="35%">
-    <stop offset="0%" stop-color="{GOLD}" stop-opacity="0.22"/>
-    <stop offset="100%" stop-color="{GOLD}" stop-opacity="0"/>
-  </radialGradient>
 </defs>
 <rect width="{width}" height="{height}" fill="url(#heroBg)"/>
-<rect width="{width}" height="{height}" fill="url(#glowA)"/>
-<rect width="{width}" height="{height}" fill="url(#glowB)"/>
-<circle cx="980" cy="30" r="120" fill="#ffffff" fill-opacity="0.07">
+<circle cx="980" cy="30" r="120" fill="#ffffff" fill-opacity="0.06">
   <animate attributeName="cy" values="30;48;30" dur="5s" repeatCount="indefinite"/>
 </circle>
-<circle cx="80" cy="160" r="90" fill="#ffffff" fill-opacity="0.06">
+<circle cx="80" cy="160" r="90" fill="#ffffff" fill-opacity="0.05">
   <animate attributeName="cx" values="80;110;80" dur="6s" repeatCount="indefinite"/>
 </circle>
 <path d="M0,155 C180,130 320,185 520,160 C740,130 900,175 1100,150 L1100,200 L0,200 Z" fill="url(#waveFill)">
@@ -495,7 +485,7 @@ def render_header_svg() -> str:
 <text text-anchor="middle" x="{width / 2:.0f}" y="72" fill="#FFFFFF"
       font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="44" font-weight="800">Xitong Ling</text>
 {"".join(frames)}
-<text text-anchor="middle" x="{width / 2:.0f}" y="168" fill="#F3E8FF"
+<text text-anchor="middle" x="{width / 2:.0f}" y="168" fill="#E9D5FF"
       font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="14" font-weight="600">
   PhD Student · Representation Learning · AI4Healthcare
 </text>
@@ -505,39 +495,29 @@ def render_header_svg() -> str:
 
 def render_about_card() -> str:
     """Wide identity strip — fills README content width."""
-    width, height = 1100, 176
+    width, height = 1100, 168
     chips = [
-        ("PhD Student", 36, 124, 120),
-        ("Representation Learning", 172, 124, 200),
-        ("AI4Healthcare", 388, 124, 130),
-        ("Tsinghua SIGS", 534, 124, 120),
-        ("Beihang -> Tsinghua", 670, 124, 160),
-        ("Open Source", 846, 124, 110),
+        ("PhD Student", 36, 118, 120),
+        ("Representation Learning", 172, 118, 200),
+        ("AI4Healthcare", 388, 118, 130),
+        ("Tsinghua SIGS", 534, 118, 120),
+        ("Beihang -> Tsinghua", 670, 118, 160),
     ]
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="About Xitong Ling">
 <defs>
-  <linearGradient id="aboutBg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}"/>
-    <stop offset="40%" stop-color="{PURPLE}"/>
-    <stop offset="75%" stop-color="{PURPLE_MID}"/>
-    <stop offset="100%" stop-color="{PURPLE_LIGHT}"/>
-  </linearGradient>
-  <linearGradient id="aboutSheen" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="45%" stop-color="#ffffff" stop-opacity="0.18"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+  <linearGradient id="aboutBg" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#2A0840"/>
+    <stop offset="50%" stop-color="{PURPLE}"/>
+    <stop offset="100%" stop-color="{PURPLE_MID}"/>
   </linearGradient>
 </defs>
 <rect width="{width}" height="{height}" rx="14" fill="url(#aboutBg)"/>
-<rect x="-160" y="0" width="160" height="{height}" fill="#ffffff" opacity="0.12">
-  <animateTransform attributeName="transform" type="translate" values="0 0;1260 0" dur="4.8s" repeatCount="indefinite"/>
-</rect>
-<rect x="0" y="0" width="8" height="{height}" fill="{GOLD}">
+<rect x="0" y="0" width="8" height="{height}" fill="#FDE68A">
   <animate attributeName="opacity" values="0.55;1;0.55" dur="2s" repeatCount="indefinite"/>
 </rect>
 <text x="36" y="42" fill="#FFFFFF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="26" font-weight="800">Xitong Ling</text>
 <text x="36" y="72" fill="#F3E8FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="600">PhD Student | Tsinghua University (SIGS)</text>
-<text x="36" y="96" fill="#EDE0F5" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="13" font-weight="500">Building representation learning systems for computational pathology & healthcare AI · Open to collaboration</text>
+<text x="36" y="96" fill="#EDE0F5" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="13" font-weight="500">Research: Representation Learning / AI4Healthcare · Homepage: lingxitong.github.io · Email: lingxt23@mails.tsinghua.edu.cn</text>
 {"".join(
     f'<g>'
     f'<rect x="{x}" y="{y}" width="{w}" height="28" rx="14" fill="#F8F0FF"/>'
@@ -545,47 +525,6 @@ def render_about_card() -> str:
     f"</g>"
     for label, x, y, w in chips
 )}
-</svg>
-"""
-
-
-def render_focus_svg() -> str:
-    """Four research pillars in one gradient strip."""
-    width, height = 1100, 150
-    pillars = [
-        ("01", "Representation Learning", "Self-supervised & foundation features"),
-        ("02", "Computational Pathology", "MIL / WSI / weakly supervised analysis"),
-        ("03", "Multimodal Medical AI", "Vision-language & cross-modal fusion"),
-        ("04", "Open Research Tools", "Baselines, benchmarks & curated lists"),
-    ]
-    card_w = 250
-    gap = 16
-    start_x = 24
-    blocks = []
-    for i, (idx, title, desc) in enumerate(pillars):
-        x = start_x + i * (card_w + gap)
-        blocks.append(
-            f'<g transform="translate({x},28)">'
-            f'<rect width="{card_w}" height="96" rx="14" fill="#2A0B3D" fill-opacity="0.55" '
-            f'stroke="#E9D5FF" stroke-opacity="0.35"/>'
-            f'<text x="16" y="28" fill="{GOLD}" font-family="Segoe UI, Ubuntu, Sans-Serif" '
-            f'font-size="13" font-weight="800">{idx}</text>'
-            f'<text x="16" y="54" fill="#FFFFFF" font-family="Segoe UI, Ubuntu, Sans-Serif" '
-            f'font-size="14" font-weight="700">{escape(title)}</text>'
-            f'<text x="16" y="76" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif" '
-            f'font-size="11" font-weight="500">{escape(desc)}</text>'
-            f"</g>"
-        )
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Research Focus">
-<defs>
-  <linearGradient id="focusBg" x1="0%" y1="0%" x2="100%" y2="0%">
-    <stop offset="0%" stop-color="{PURPLE_DEEP}"/>
-    <stop offset="50%" stop-color="{PURPLE}"/>
-    <stop offset="100%" stop-color="{PURPLE_SOFT}"/>
-  </linearGradient>
-</defs>
-<rect width="{width}" height="{height}" rx="14" fill="url(#focusBg)"/>
-{"".join(blocks)}
 </svg>
 """
 
@@ -610,7 +549,6 @@ def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     header_path = OUT_DIR / "header.svg"
     about_path = OUT_DIR / "about.svg"
-    focus_path = OUT_DIR / "focus.svg"
     stats_path = OUT_DIR / "stats.svg"
     langs_path = OUT_DIR / "top-langs.svg"
     # Versioned filenames bust GitHub/camo image cache after redesigns.
@@ -619,7 +557,6 @@ def main() -> int:
 
     header_path.write_text(render_header_svg(), encoding="utf-8")
     about_path.write_text(render_about_card(), encoding="utf-8")
-    focus_path.write_text(render_focus_svg(), encoding="utf-8")
     stats_svg = render_stats_svg(
         total_stars=total_stars,
         total_forks=total_forks,
@@ -638,7 +575,7 @@ def main() -> int:
     if not featured:
         featured = sorted(
             repos, key=lambda r: int(r.get("stargazers_count") or 0), reverse=True
-        )[:6]
+        )[:4]
 
     for repo in featured:
         path = OUT_DIR / f"pin-{repo['name']}.svg"
@@ -647,7 +584,6 @@ def main() -> int:
 
     print(f"Wrote {header_path}")
     print(f"Wrote {about_path}")
-    print(f"Wrote {focus_path}")
     print(f"Wrote {stats_path} / {stats_v_path} (stars={total_stars})")
     print(f"Wrote {langs_path} / {langs_v_path} (langs={len(lang_counter)})")
     return 0

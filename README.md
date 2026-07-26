@@ -2,24 +2,19 @@
 
 <table width="100%">
   <tr>
-    <td align="center" width="25%">
+    <td align="center" width="33%">
       <a href="https://lingxitong.github.io/">
-        <img src="https://img.shields.io/badge/Homepage-lingxitong.github.io-660874?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Homepage">
+        <img src="https://img.shields.io/badge/Homepage-lingxitong.github.io-660874?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Homepage" width="100%">
       </a>
     </td>
-    <td align="center" width="25%">
+    <td align="center" width="34%">
       <a href="mailto:lingxt23@mails.tsinghua.edu.cn">
-        <img src="https://img.shields.io/badge/Email-Tsinghua%20Mail-82318E?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
+        <img src="https://img.shields.io/badge/Email-lingxt23%40mails.tsinghua.edu.cn-82318E?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" width="100%">
       </a>
     </td>
-    <td align="center" width="25%">
+    <td align="center" width="33%">
       <a href="https://github.com/lingxitong">
-        <img src="https://img.shields.io/badge/GitHub-lingxitong-3D0A4A?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-      </a>
-    </td>
-    <td align="center" width="25%">
-      <a href="https://lingxitong.github.io/">
-        <img src="https://img.shields.io/badge/Publications-Homepage-9B59B6?style=for-the-badge&logo=googlescholar&logoColor=white" alt="Publications">
+        <img src="https://img.shields.io/badge/GitHub-lingxitong-3D0A4A?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" width="100%">
       </a>
     </td>
   </tr>
@@ -29,19 +24,11 @@
 
 <img src="./profile/about.svg" alt="About Xitong Ling" width="100%">
 
-I am a **PhD student at Tsinghua University (SIGS)**, previously trained at **Beihang University**. My research sits at the intersection of **representation learning** and **AI4Healthcare**, with a particular focus on computational pathology, whole-slide image analysis, and multimodal medical intelligence.
-
-| | |
-|---|---|
-| **Education** | Beihang University (B.S.) → Tsinghua University (Ph.D.) |
-| **Fields** | Representation Learning / AI4Healthcare |
-| **Topics** | Computational Pathology · Foundation Models · MIL · Multimodal Learning · WSI Analysis |
-| **Homepage** | [lingxitong.github.io](https://lingxitong.github.io/) |
-| **Email** | [lingxt23@mails.tsinghua.edu.cn](mailto:lingxt23@mails.tsinghua.edu.cn) |
-
-### Research Focus
-
-<img src="./profile/focus.svg" alt="Research Focus" width="100%">
+- Bachelor: Beihang University
+- PhD Student: Tsinghua University (SIGS)
+- Research Fields: Representation Learning / AI4Healthcare
+- Interests: Computational Pathology, Foundation Models, Multimodal Learning, WSI Analysis
+- Email: lingxt23@mails.tsinghua.edu.cn
 
 ### GitHub Stats
 
@@ -52,30 +39,6 @@ I am a **PhD student at Tsinghua University (SIGS)**, previously trained at **Be
     </td>
     <td width="45%" valign="top">
       <img src="./profile/langs-neon.svg" alt="Top Languages" width="100%">
-    </td>
-  </tr>
-</table>
-
-### Highlights
-
-<table width="100%">
-  <tr>
-    <td width="50%" valign="top">
-
-**Selected Outcomes**
-- Papers in venues such as **NPJ Digital Medicine**, **AAAI**, **CVPR**, **MIDL**, **JBHI**
-- Open-source ecosystem around **MIL baselines** and pathology resources
-- Curated paper lists for **WSI / computational pathology**
-
-    </td>
-    <td width="50%" valign="top">
-
-**Service & Recognition**
-- Reviewer: ACM-MM / MICCAI / AAAI
-- National Scholarship (Tsinghua)
-- Outstanding Graduates (Beijing)
-- Continuously maintaining community resources for digital pathology
-
     </td>
   </tr>
 </table>
@@ -107,40 +70,24 @@ I am a **PhD student at Tsinghua University (SIGS)**, previously trained at **Be
       </a>
     </td>
   </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="https://github.com/lingxitong/CAMELYON-PLUS-BENCHMARK">
-        <img src="./profile/pin-CAMELYON-PLUS-BENCHMARK.svg" alt="CAMELYON-PLUS-BENCHMARK" width="100%">
-      </a>
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://github.com/lingxitong/ICCV-2025-WSI-papers">
-        <img src="./profile/pin-ICCV-2025-WSI-papers.svg" alt="ICCV-2025-WSI-papers" width="100%">
-      </a>
-    </td>
-  </tr>
 </table>
 
 ### Tech Stack
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=python,pytorch,opencv,sklearn,numpy,git,docker,linux,cpp,java,cs,vscode,anaconda&perline=7" alt="Tech Stack" width="100%">
+  <img src="https://skillicons.dev/icons?i=python,pytorch,opencv,sklearn,git,docker,linux,cpp,java,cs,vscode,anaconda&perline=8" alt="Tech Stack" width="100%">
 </p>
 
 <table width="100%">
   <tr>
-    <td align="center"><img src="https://img.shields.io/badge/PyTorch-660874?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch"></td>
-    <td align="center"><img src="https://img.shields.io/badge/Hugging%20Face-82318E?style=for-the-badge&logo=huggingface&logoColor=white" alt="Hugging Face"></td>
-    <td align="center"><img src="https://img.shields.io/badge/OpenCV-9B59B6?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV"></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="https://img.shields.io/badge/Scikit--learn-4A0A5C?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="Scikit-learn"></td>
-    <td align="center"><img src="https://img.shields.io/badge/Docker-82318E?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"></td>
-    <td align="center"><img src="https://img.shields.io/badge/Git-660874?style=for-the-badge&logo=git&logoColor=white" alt="Git"></td>
+    <td align="center"><img src="https://img.shields.io/badge/PyTorch-660874?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"></td>
+    <td align="center"><img src="https://img.shields.io/badge/Hugging%20Face-82318E?style=flat-square&logo=huggingface&logoColor=white" alt="Hugging Face"></td>
+    <td align="center"><img src="https://img.shields.io/badge/OpenCV-9B59B6?style=flat-square&logo=opencv&logoColor=white" alt="OpenCV"></td>
+    <td align="center"><img src="https://img.shields.io/badge/Scikit--learn-4A0A5C?style=flat-square&logo=scikitlearn&logoColor=white" alt="Scikit-learn"></td>
+    <td align="center"><img src="https://img.shields.io/badge/Docker-82318E?style=flat-square&logo=docker&logoColor=white" alt="Docker"></td>
+    <td align="center"><img src="https://img.shields.io/badge/Git-660874?style=flat-square&logo=git&logoColor=white" alt="Git"></td>
   </tr>
 </table>
-
-**Toolkit focus:** weakly-supervised WSI pipelines · pathology foundation models · reproducible MIL benchmarks · research engineering
 
 ### Contribution Snake
 
@@ -151,14 +98,12 @@ I am a **PhD student at Tsinghua University (SIGS)**, previously trained at **Be
 <table width="100%">
   <tr>
     <td align="center">
-      <b>Open to research discussion, collaboration, and open-source contributions.</b><br>
-      <a href="https://lingxitong.github.io/">Homepage</a>
+      <b>Feel free to reach out for research discussion & collaboration.</b><br>
+      <a href="https://lingxitong.github.io/">lingxitong.github.io</a>
       ·
-      <a href="mailto:lingxt23@mails.tsinghua.edu.cn">Email</a>
-      ·
-      <a href="https://github.com/lingxitong">GitHub</a>
+      <a href="mailto:lingxt23@mails.tsinghua.edu.cn">lingxt23@mails.tsinghua.edu.cn</a>
     </td>
   </tr>
 </table>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1A0530,40:660874,75:9B59B6,100:C084FC&height=100&section=footer" alt="footer" width="100%">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:4A0A5C,45:660874,100:9B59B6&height=90&section=footer" alt="footer" width="100%">
