@@ -471,6 +471,17 @@ def render_header_svg() -> str:
     <stop offset="0%" stop-color="#12061A" stop-opacity="0.15"/>
     <stop offset="100%" stop-color="#12061A" stop-opacity="0.55"/>
   </linearGradient>
+  <linearGradient id="nameGlow" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#E9D5FF">
+      <animate attributeName="stop-color" values="#E9D5FF;#F5D0FE;#DDD6FE;#C4B5FD;#E9D5FF" dur="3s" repeatCount="indefinite"/>
+    </stop>
+    <stop offset="50%" stop-color="#F3E8FF">
+      <animate attributeName="stop-color" values="#F3E8FF;#E9D5FF;#F5D0FE;#DDD6FE;#F3E8FF" dur="3s" repeatCount="indefinite"/>
+    </stop>
+    <stop offset="100%" stop-color="#C4B5FD">
+      <animate attributeName="stop-color" values="#C4B5FD;#E9D5FF;#F3E8FF;#F5D0FE;#C4B5FD" dur="3s" repeatCount="indefinite"/>
+    </stop>
+  </linearGradient>
 </defs>
 <rect width="{width}" height="{height}" fill="url(#heroBg)"/>
 <circle cx="980" cy="30" r="120" fill="#ffffff" fill-opacity="0.06">
@@ -482,8 +493,12 @@ def render_header_svg() -> str:
 <path d="M0,155 C180,130 320,185 520,160 C740,130 900,175 1100,150 L1100,200 L0,200 Z" fill="url(#waveFill)">
   <animateTransform attributeName="transform" type="translate" values="0 0; -40 0; 0 0" dur="8s" repeatCount="indefinite"/>
 </path>
-<text text-anchor="middle" x="{width / 2:.0f}" y="72" fill="#FFFFFF"
-      font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="44" font-weight="800">Xitong Ling</text>
+<text text-anchor="middle" x="{width / 2:.0f}" y="72" fill="url(#nameGlow)"
+      font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="44" font-weight="800">
+  Xitong Ling
+  <animate attributeName="opacity" values="0.82;1;0.82" dur="2.4s" repeatCount="indefinite"/>
+  <animateTransform attributeName="transform" type="translate" values="0 0; 0 -3; 0 0" dur="2.4s" repeatCount="indefinite"/>
+</text>
 {"".join(frames)}
 <text text-anchor="middle" x="{width / 2:.0f}" y="168" fill="#E9D5FF"
       font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="14" font-weight="600">
