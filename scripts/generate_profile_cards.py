@@ -494,7 +494,10 @@ def render_header_svg() -> str:
 
 
 def render_about_card() -> str:
-    """Wide identity strip — fills README content width."""
+    """Wide identity strip — fills README content width.
+
+    Keep the markup Camo-friendly: ASCII text only, no SMIL animation.
+    """
     width, height = 1100, 168
     chips = [
         ("PhD Student", 36, 118, 120),
@@ -503,30 +506,41 @@ def render_about_card() -> str:
         ("Tsinghua SIGS", 534, 118, 120),
         ("Beihang -> Tsinghua", 670, 118, 160),
     ]
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="About Xitong Ling">
-<defs>
-  <linearGradient id="aboutBg" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#2A0840"/>
-    <stop offset="50%" stop-color="{PURPLE}"/>
-    <stop offset="100%" stop-color="{PURPLE_MID}"/>
-  </linearGradient>
-</defs>
-<rect width="{width}" height="{height}" rx="14" fill="url(#aboutBg)"/>
-<rect x="0" y="0" width="8" height="{height}" fill="#FDE68A">
-  <animate attributeName="opacity" values="0.55;1;0.55" dur="2s" repeatCount="indefinite"/>
-</rect>
-<text x="36" y="42" fill="#FFFFFF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="26" font-weight="800">Xitong Ling</text>
-<text x="36" y="72" fill="#F3E8FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="600">PhD Student | Tsinghua University (SIGS)</text>
-<text x="36" y="96" fill="#EDE0F5" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="13" font-weight="500">Research: Representation Learning / AI4Healthcare · Homepage: lingxitong.github.io · Email: lingxt23@mails.tsinghua.edu.cn</text>
-{"".join(
-    f'<g>'
-    f'<rect x="{x}" y="{y}" width="{w}" height="28" rx="14" fill="#F8F0FF"/>'
-    f'<text x="{x + 12}" y="{y + 18}" fill="{PURPLE_INK}" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">{label}</text>'
-    f"</g>"
-    for label, x, y, w in chips
-)}
-</svg>
-"""
+    chip_svg = "".join(
+        (
+            f'<g>'
+            f'<rect x="{x}" y="{y}" width="{w}" height="28" rx="14" fill="#F8F0FF"/>'
+            f'<text x="{x + 12}" y="{y + 18}" fill="{PURPLE_INK}" '
+            f'font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="12" font-weight="700">'
+            f"{label}</text></g>"
+        )
+        for label, x, y, w in chips
+    )
+    # Use only ASCII in text nodes to avoid encoding/proxy breakage on GitHub Camo.
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
+        f'viewBox="0 0 {width} {height}" role="img" aria-label="About Xitong Ling">'
+        f"<defs>"
+        f'<linearGradient id="aboutBg" x1="0" y1="0" x2="1" y2="0">'
+        f'<stop offset="0%" stop-color="#2A0840"/>'
+        f'<stop offset="50%" stop-color="{PURPLE}"/>'
+        f'<stop offset="100%" stop-color="{PURPLE_MID}"/>'
+        f"</linearGradient>"
+        f"</defs>"
+        f'<rect width="{width}" height="{height}" rx="14" fill="url(#aboutBg)"/>'
+        f'<rect x="0" y="0" width="8" height="{height}" fill="#FDE68A"/>'
+        f'<text x="36" y="42" fill="#FFFFFF" font-family="Segoe UI, Ubuntu, Sans-Serif" '
+        f'font-size="26" font-weight="800">Xitong Ling</text>'
+        f'<text x="36" y="72" fill="#F3E8FF" font-family="Segoe UI, Ubuntu, Sans-Serif" '
+        f'font-size="15" font-weight="600">PhD Student | Tsinghua University (SIGS)</text>'
+        f'<text x="36" y="96" fill="#EDE0F5" font-family="Segoe UI, Ubuntu, Sans-Serif" '
+        f'font-size="13" font-weight="500">'
+        f"Research: Representation Learning / AI4Healthcare | "
+        f"Homepage: lingxitong.github.io | Email: lingxt23@mails.tsinghua.edu.cn"
+        f"</text>"
+        f"{chip_svg}"
+        f"</svg>\n"
+    )
 
 
 def main() -> int:
@@ -555,8 +569,12 @@ def main() -> int:
     stats_v_path = OUT_DIR / "stats-neon.svg"
     langs_v_path = OUT_DIR / "langs-neon.svg"
 
-    header_path.write_text(render_header_svg(), encoding="utf-8")
-    about_path.write_text(render_about_card(), encoding="utf-8")
+    header_path.write_text(render_header_svg(), encoding="utf-8", newline="\n")
+    about_svg = render_about_card()
+    about_path.write_text(about_svg, encoding="utf-8", newline="\n")
+    # Cache-bust filename used by README (GitHub Camo may cache broken fetches).
+    about_card_path = OUT_DIR / "about-card.svg"
+    about_card_path.write_text(about_svg, encoding="utf-8", newline="\n")
     stats_svg = render_stats_svg(
         total_stars=total_stars,
         total_forks=total_forks,
@@ -583,7 +601,7 @@ def main() -> int:
         print(f"Wrote {path}")
 
     print(f"Wrote {header_path}")
-    print(f"Wrote {about_path}")
+    print(f"Wrote {about_path} / {about_card_path}")
     print(f"Wrote {stats_path} / {stats_v_path} (stars={total_stars})")
     print(f"Wrote {langs_path} / {langs_v_path} (langs={len(lang_counter)})")
     return 0

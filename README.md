@@ -22,7 +22,7 @@
 
 ### About Me
 
-<img src="./profile/about.svg" alt="About Xitong Ling" width="100%">
+<img src="./profile/about-card.svg" alt="About Xitong Ling" width="100%">
 
 - Bachelor: Beihang University
 - PhD Student: Tsinghua University (SIGS)
