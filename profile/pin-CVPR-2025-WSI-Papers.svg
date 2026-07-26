@@ -9,13 +9,28 @@
   .name { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #660874; }
   .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6B4E78; }
   .meta { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #3D0A4A; }
+  .star-meta { font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #B8860B; }
   .card { fill: #FCF8FF; stroke: url(#pinStroke); }
+  .card-body { animation: pinIn 0.7s ease both; }
+  .twinkle { animation: twinkle 1.4s ease-in-out infinite; transform-origin: 156px 96px; }
+  @keyframes pinIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.75; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
 </style>
-<rect class="card" x="0.5" y="0.5" width="399" height="117" rx="8"/>
-<text class="name" x="18" y="30">CVPR-2025-WSI-Papers</text>
-<text class="desc" x="18" y="54">Whole Slide Images papers in CVPR-2025</text>
-<circle cx="24" cy="96" r="4" fill="#82318E"/>
-<text class="meta" x="34" y="100">Markdown</text>
-<text class="meta" x="150" y="100">★ 58</text>
-<text class="meta" x="230" y="100">⑂ 0</text>
+<g class="card-body">
+  <rect class="card" x="0.5" y="0.5" width="399" height="117" rx="8"/>
+  <text class="name" x="18" y="30">CVPR-2025-WSI-Papers</text>
+  <text class="desc" x="18" y="54">Whole Slide Images papers in CVPR-2025</text>
+  <circle cx="24" cy="96" r="4" fill="#82318E"/>
+  <text class="meta" x="34" y="100">Markdown</text>
+  <g class="twinkle">
+    <text class="star-meta" x="150" y="100">★ 58</text>
+  </g>
+  <text class="meta" x="230" y="100">fork 0</text>
+</g>
 </svg>
