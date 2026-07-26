@@ -32,6 +32,14 @@ FEATURED_REPOS = [
     "PFM_Segmentation",
 ]
 
+# Tsinghua purple palette
+PURPLE = "#660874"
+PURPLE_MID = "#82318E"
+PURPLE_SOFT = "#9B59B6"
+PURPLE_PALE = "#EDE0F5"
+PURPLE_INK = "#3D0A4A"
+PURPLE_MUTED = "#6B4E78"
+
 
 def api_get(url: str) -> Any:
     headers = {
@@ -115,12 +123,12 @@ def render_stats_svg(
     issues: int,
 ) -> str:
     rows = [
-        ("Total Stars", total_stars, "#ffcb2f"),
-        ("Total Forks", total_forks, "#40c463"),
-        ("Public Repos", public_repos, "#79c0ff"),
-        ("Followers", followers, "#f778ba"),
-        ("Pull Requests", prs, "#a371f7"),
-        ("Issues", issues, "#ffa657"),
+        ("Total Stars", total_stars, "#D4A017"),
+        ("Total Forks", total_forks, "#82318E"),
+        ("Public Repos", public_repos, "#660874"),
+        ("Followers", followers, "#C084FC"),
+        ("Pull Requests", prs, "#9B59B6"),
+        ("Issues", issues, "#B57EDC"),
     ]
     row_h = 28
     height = 48 + len(rows) * row_h + 16
@@ -130,11 +138,17 @@ def render_stats_svg(
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" role="img" '
         f'aria-label="{escape(USERNAME)} GitHub stats">',
+        "<defs>",
+        f'  <linearGradient id="statsStroke" x1="0" y1="0" x2="1" y2="1">',
+        f'    <stop offset="0%" stop-color="{PURPLE}"/>',
+        f'    <stop offset="100%" stop-color="{PURPLE_SOFT}"/>',
+        "  </linearGradient>",
+        "</defs>",
         "<style>",
-        "  .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }",
-        "  .label { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }",
-        "  .value { font: 700 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #24292f; }",
-        "  .card { fill: #ffffff; stroke: #d0d7de; }",
+        f"  .title {{ font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE}; }}",
+        f"  .label {{ font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_MUTED}; }}",
+        f"  .value {{ font: 700 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_INK}; }}",
+        f"  .card {{ fill: #FCF8FF; stroke: url(#statsStroke); }}",
         "</style>",
         f'<rect class="card" x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="8"/>',
         f'<text class="title" x="20" y="30">{escape(USERNAME)}\'s GitHub Stats</text>',
@@ -163,25 +177,31 @@ def render_langs_svg(lang_counts: list[tuple[str, int]], limit: int = 8) -> str:
     row_h = 26
     height = 52 + len(items) * row_h + 18
     palette = [
-        "#2f81f7",
-        "#3fb950",
-        "#a371f7",
-        "#f78166",
-        "#d2a8ff",
-        "#79c0ff",
-        "#ffa657",
-        "#ff7b72",
+        PURPLE,
+        PURPLE_MID,
+        PURPLE_SOFT,
+        "#B57EDC",
+        "#C084FC",
+        "#D8B4FE",
+        "#A855F7",
+        "#7E22CE",
     ]
 
     lines = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" role="img" aria-label="Top Languages">',
+        "<defs>",
+        '  <linearGradient id="langStroke" x1="0" y1="0" x2="1" y2="1">',
+        f'    <stop offset="0%" stop-color="{PURPLE}"/>',
+        f'    <stop offset="100%" stop-color="{PURPLE_SOFT}"/>',
+        "  </linearGradient>",
+        "</defs>",
         "<style>",
-        "  .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }",
-        "  .label { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }",
-        "  .pct { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #24292f; }",
-        "  .track { fill: #eaeef2; }",
-        "  .card { fill: #ffffff; stroke: #d0d7de; }",
+        f"  .title {{ font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE}; }}",
+        f"  .label {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_MUTED}; }}",
+        f"  .pct {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_INK}; }}",
+        f"  .track {{ fill: {PURPLE_PALE}; }}",
+        "  .card { fill: #FCF8FF; stroke: url(#langStroke); }",
         "</style>",
         f'<rect class="card" x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="8"/>',
         '<text class="title" x="20" y="30">Most Used Languages</text>',
@@ -216,13 +236,18 @@ def render_repo_card(repo: dict[str, Any]) -> str:
 
     lines = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
-        f'viewBox="0 0 {width} {height}" role="img" aria-label="{escape(name)}">'
-        ,
+        f'viewBox="0 0 {width} {height}" role="img" aria-label="{escape(name)}">',
+        "<defs>",
+        '  <linearGradient id="pinStroke" x1="0" y1="0" x2="1" y2="1">',
+        f'    <stop offset="0%" stop-color="{PURPLE}"/>',
+        f'    <stop offset="100%" stop-color="{PURPLE_SOFT}"/>',
+        "  </linearGradient>",
+        "</defs>",
         "<style>",
-        "  .name { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }",
-        "  .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }",
-        "  .meta { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #656d76; }",
-        "  .card { fill: #ffffff; stroke: #d0d7de; }",
+        f"  .name {{ font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE}; }}",
+        f"  .desc {{ font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_MUTED}; }}",
+        f"  .meta {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_INK}; }}",
+        "  .card { fill: #FCF8FF; stroke: url(#pinStroke); }",
         "</style>",
         f'<rect class="card" x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="8"/>',
         f'<text class="name" x="18" y="30">{escape(name)}</text>',
@@ -231,12 +256,55 @@ def render_repo_card(repo: dict[str, Any]) -> str:
         lines.append(f'<text class="desc" x="18" y="{54 + i * 16}">{escape(line)}</text>')
 
     meta_y = 100
-    lines.append(f'<circle cx="24" cy="{meta_y - 4}" r="4" fill="#2f81f7"/>')
+    lines.append(f'<circle cx="24" cy="{meta_y - 4}" r="4" fill="{PURPLE_MID}"/>')
     lines.append(f'<text class="meta" x="34" y="{meta_y}">{escape(language)}</text>')
     lines.append(f'<text class="meta" x="150" y="{meta_y}">★ {escape(compact(stars))}</text>')
     lines.append(f'<text class="meta" x="230" y="{meta_y}">⑂ {escape(compact(forks))}</text>')
     lines.append("</svg>")
     return "\n".join(lines) + "\n"
+
+
+def render_about_card() -> str:
+    """Identity card (replaces the old Python dict code block)."""
+    width, height = 720, 230
+    chips = [
+        ("PhD Student", 18, 168, 118),
+        ("Representation Learning", 148, 168, 188),
+        ("AI4Healthcare", 348, 168, 128),
+    ]
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="About Xitong Ling">
+<defs>
+  <linearGradient id="aboutBg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#4A0A5C"/>
+    <stop offset="45%" stop-color="{PURPLE}"/>
+    <stop offset="100%" stop-color="{PURPLE_MID}"/>
+  </linearGradient>
+  <linearGradient id="aboutSheen" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<style>
+  .name {{ font: 700 28px 'Segoe UI', Ubuntu, Sans-Serif; fill: #ffffff; }}
+  .role {{ font: 600 14px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F3E8FF; }}
+  .row {{ font: 500 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #EDE0F5; }}
+  .chip {{ font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_INK}; }}
+</style>
+<rect x="0" y="0" width="{width}" height="{height}" rx="16" fill="url(#aboutBg)"/>
+<rect x="0" y="0" width="{width}" height="{height}" rx="16" fill="url(#aboutSheen)"/>
+<circle cx="640" cy="36" r="70" fill="#ffffff" fill-opacity="0.06"/>
+<circle cx="680" cy="180" r="90" fill="#ffffff" fill-opacity="0.05"/>
+<text class="name" x="28" y="48">Xitong Ling</text>
+<text class="role" x="28" y="76">PhD Student | Tsinghua University (SIGS)</text>
+<text class="row" x="28" y="112">Beihang University  -&gt;  Tsinghua University</text>
+<text class="row" x="28" y="134">Homepage: lingxitong.github.io</text>
+{"".join(
+    f'<rect x="{x}" y="{y}" width="{w}" height="28" rx="14" fill="#F8F0FF"/>'
+    f'<text class="chip" x="{x + 14}" y="{y + 18}">{label}</text>'
+    for label, x, y, w in chips
+)}
+</svg>
+"""
 
 
 def main() -> int:
@@ -256,9 +324,11 @@ def main() -> int:
     issues = fetch_count(f"author:{USERNAME} type:issue")
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    about_path = OUT_DIR / "about.svg"
     stats_path = OUT_DIR / "stats.svg"
     langs_path = OUT_DIR / "top-langs.svg"
 
+    about_path.write_text(render_about_card(), encoding="utf-8")
     stats_path.write_text(
         render_stats_svg(
             total_stars=total_stars,
@@ -286,6 +356,7 @@ def main() -> int:
         path.write_text(render_repo_card(repo), encoding="utf-8")
         print(f"Wrote {path}")
 
+    print(f"Wrote {about_path}")
     print(f"Wrote {stats_path} (stars={total_stars})")
     print(f"Wrote {langs_path} (langs={len(lang_counter)})")
     return 0

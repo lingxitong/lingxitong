@@ -1,19 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="360" height="122" viewBox="0 0 360 122" role="img" aria-label="Top Languages">
+<defs>
+  <linearGradient id="langStroke" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#660874"/>
+    <stop offset="100%" stop-color="#9B59B6"/>
+  </linearGradient>
+</defs>
 <style>
-  .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }
-  .label { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }
-  .pct { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #24292f; }
-  .track { fill: #eaeef2; }
-  .card { fill: #ffffff; stroke: #d0d7de; }
+  .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #660874; }
+  .label { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6B4E78; }
+  .pct { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #3D0A4A; }
+  .track { fill: #EDE0F5; }
+  .card { fill: #FCF8FF; stroke: url(#langStroke); }
 </style>
 <rect class="card" x="0.5" y="0.5" width="359" height="121" rx="8"/>
 <text class="title" x="20" y="30">Most Used Languages</text>
 <text class="label" x="20" y="54">Python</text>
 <rect class="track" x="130" y="44" width="160" height="8" rx="4"/>
-<rect x="130" y="44" width="160.0" height="8" rx="4" fill="#2f81f7"/>
+<rect x="130" y="44" width="160.0" height="8" rx="4" fill="#660874"/>
 <text class="pct" x="340" y="54" text-anchor="end">94.1%</text>
 <text class="label" x="20" y="80">Groovy</text>
 <rect class="track" x="130" y="70" width="160" height="8" rx="4"/>
-<rect x="130" y="70" width="10.0" height="8" rx="4" fill="#3fb950"/>
+<rect x="130" y="70" width="10.0" height="8" rx="4" fill="#82318E"/>
 <text class="pct" x="340" y="80" text-anchor="end">5.9%</text>
 </svg>

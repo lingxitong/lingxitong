@@ -1,45 +1,40 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0B4F6C,50:1B7A9E,100:58A6FF&height=160&section=header&text=Xitong%20Ling&fontSize=42&fontColor=ffffff&fontAlignY=35&desc=Computational%20Pathology%20%C2%B7%20Foundation%20Models%20%C2%B7%20Medical%20AI&descAlignY=58&descSize=15" alt="header" width="100%">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:4A0A5C,45:660874,100:9B59B6&height=160&section=header&text=Xitong%20Ling&fontSize=42&fontColor=ffffff&fontAlignY=35&desc=PhD%20Student%20%C2%B7%20Representation%20Learning%20%C2%B7%20AI4Healthcare&descAlignY=58&descSize=15" alt="header" width="100%">
 
   <a href="https://lingxitong.github.io/">
-    <img src="https://img.shields.io/badge/Homepage-lingxitong.github.io-0B4F6C?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Homepage">
+    <img src="https://img.shields.io/badge/Homepage-lingxitong.github.io-660874?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Homepage">
   </a>
   <a href="mailto:lingxt23@mails.tsinghua.edu.cn">
-    <img src="https://img.shields.io/badge/Email-lingxt23%40mails.tsinghua.edu.cn-1B7A9E?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
+    <img src="https://img.shields.io/badge/Email-lingxt23%40mails.tsinghua.edu.cn-82318E?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
   </a>
   <a href="https://github.com/lingxitong">
-    <img src="https://img.shields.io/badge/GitHub-lingxitong-24292F?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+    <img src="https://img.shields.io/badge/GitHub-lingxitong-3D0A4A?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
 
   <br><br>
 
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3200&pause=900&color=1B7A9E&center=true&vCenter=true&width=760&lines=M.S.+%40+Tsinghua+University;Computational+Pathology+%2F+WSI+Analysis;Foundation+Models+%26+Multimodal+Learning;Open-source+MIL+%26+Medical+AI" alt="Typing SVG">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3200&pause=900&color=82318E&center=true&vCenter=true&width=760&lines=PhD+Student+%40+Tsinghua+University;Representation+Learning;AI4Healthcare;Computational+Pathology+%26+Medical+AI" alt="Typing SVG">
 </div>
 
 ---
 
 ### About Me
 
-```python
-researcher = {
-    "name": "Xitong Ling",
-    "affiliation": "Tsinghua University (SIGS)",
-    "background": "Beihang University → Tsinghua University",
-    "focus": [
-        "Computational Pathology",
-        "Multiple Instance Learning",
-        "Foundation Models",
-        "Multimodal Learning",
-    ],
-    "status": "Seeking Ph.D. opportunities",
-    "homepage": "https://lingxitong.github.io/",
-}
-```
+<p align="center">
+  <img src="./profile/about.svg" alt="About Xitong Ling" width="720">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-PhD%20Student-660874?style=flat-square" alt="PhD Student">
+  <img src="https://img.shields.io/badge/Field-Representation%20Learning-82318E?style=flat-square" alt="Representation Learning">
+  <img src="https://img.shields.io/badge/Field-AI4Healthcare-9B59B6?style=flat-square" alt="AI4Healthcare">
+  <img src="https://img.shields.io/badge/School-Tsinghua%20University-4A0A5C?style=flat-square" alt="Tsinghua">
+</p>
 
 - Bachelor: Beihang University
-- Master: Tsinghua University
-- Fields: AI4Healthcare / Computational Pathology / Foundation Models
-- Interests: MIL, WSI Analysis, Multimodal Learning, Medical AI
+- PhD Student: Tsinghua University (SIGS)
+- Research Fields: Representation Learning / AI4Healthcare
+- Interests: Computational Pathology, Foundation Models, Multimodal Learning, WSI Analysis
 - Email: lingxt23@mails.tsinghua.edu.cn
 
 ---
@@ -51,12 +46,12 @@ researcher = {
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch">
-  <img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black" alt="Hugging Face">
-  <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white" alt="OpenCV">
-  <img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" alt="Scikit-learn">
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker">
-  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
+  <img src="https://img.shields.io/badge/PyTorch-660874?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/Hugging%20Face-82318E?style=flat-square&logo=huggingface&logoColor=white" alt="Hugging Face">
+  <img src="https://img.shields.io/badge/OpenCV-9B59B6?style=flat-square&logo=opencv&logoColor=white" alt="OpenCV">
+  <img src="https://img.shields.io/badge/Scikit--learn-4A0A5C?style=flat-square&logo=scikitlearn&logoColor=white" alt="Scikit-learn">
+  <img src="https://img.shields.io/badge/Docker-82318E?style=flat-square&logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/Git-660874?style=flat-square&logo=git&logoColor=white" alt="Git">
 </p>
 
 ---
@@ -110,5 +105,5 @@ researcher = {
   Homepage: <a href="https://lingxitong.github.io/">lingxitong.github.io</a>
   · Email: <a href="mailto:lingxt23@mails.tsinghua.edu.cn">lingxt23@mails.tsinghua.edu.cn</a>
   <br><br>
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0B4F6C,50:1B7A9E,100:58A6FF&height=100&section=footer" alt="footer" width="100%">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:4A0A5C,45:660874,100:9B59B6&height=100&section=footer" alt="footer" width="100%">
 </div>

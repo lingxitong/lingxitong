@@ -1,15 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="400" height="118" viewBox="0 0 400 118" role="img" aria-label="MIL_BASELINE">
+<defs>
+  <linearGradient id="pinStroke" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#660874"/>
+    <stop offset="100%" stop-color="#9B59B6"/>
+  </linearGradient>
+</defs>
 <style>
-  .name { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }
-  .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }
-  .meta { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #656d76; }
-  .card { fill: #ffffff; stroke: #d0d7de; }
+  .name { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #660874; }
+  .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #6B4E78; }
+  .meta { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #3D0A4A; }
+  .card { fill: #FCF8FF; stroke: url(#pinStroke); }
 </style>
 <rect class="card" x="0.5" y="0.5" width="399" height="117" rx="8"/>
 <text class="name" x="18" y="30">MIL_BASELINE</text>
 <text class="desc" x="18" y="54">A library that integrates different MIL</text>
 <text class="desc" x="18" y="70">methods into a unified framework</text>
-<circle cx="24" cy="96" r="4" fill="#2f81f7"/>
+<circle cx="24" cy="96" r="4" fill="#82318E"/>
 <text class="meta" x="34" y="100">Python</text>
 <text class="meta" x="150" y="100">★ 356</text>
 <text class="meta" x="230" y="100">⑂ 31</text>
