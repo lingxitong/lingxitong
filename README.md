@@ -81,8 +81,8 @@
 ### GitHub Stats
 
 <p align="center">
-  <img src="./profile/stats.svg" alt="GitHub Stats" width="460">
-  <img src="./profile/top-langs.svg" alt="Top Languages" width="360">
+  <img src="./profile/stats-neon.svg" alt="GitHub Stats" width="520">
+  <img src="./profile/langs-neon.svg" alt="Top Languages" width="420">
 </p>
 
 ---

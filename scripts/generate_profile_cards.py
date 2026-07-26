@@ -81,6 +81,26 @@ def fetch_owned_repos() -> list[dict[str, Any]]:
     return [r for r in repos if not r.get("fork")]
 
 
+def fetch_language_bytes(repos: list[dict[str, Any]], top_n: int = 20) -> Counter[str]:
+    """Byte-weighted languages from top starred repos (richer than primary-language only)."""
+    ranked = sorted(
+        repos, key=lambda r: int(r.get("stargazers_count") or 0), reverse=True
+    )[:top_n]
+    counter: Counter[str] = Counter()
+    for repo in ranked:
+        full = repo.get("full_name")
+        if not full:
+            continue
+        try:
+            data = api_get(f"{API}/repos/{full}/languages")
+        except RuntimeError:
+            continue
+        if isinstance(data, dict):
+            for lang, bytes_count in data.items():
+                counter[lang] += int(bytes_count or 0)
+    return counter
+
+
 def fetch_count(query: str) -> int:
     data = api_get(f"{API}/search/issues?q={urllib.request.quote(query)}&per_page=1")
     return int(data.get("total_count", 0))
@@ -135,131 +155,128 @@ def render_stats_svg(
     prs: int,
     issues: int,
 ) -> str:
-    rows = [
-        ("Total Forks", total_forks, "#82318E"),
-        ("Public Repos", public_repos, "#660874"),
-        ("Followers", followers, "#C084FC"),
-        ("Pull Requests", prs, "#9B59B6"),
-        ("Issues", issues, "#B57EDC"),
+    """Dark neon dashboard — looks flashy even before animations finish."""
+    width, height = 520, 300
+    tiles = [
+        ("Forks", total_forks, "#C084FC"),
+        ("Repos", public_repos, "#E9D5FF"),
+        ("Followers", followers, "#F0ABFC"),
+        ("PRs", prs, "#D8B4FE"),
+        ("Issues", issues, "#A78BFA"),
+        ("Stars", total_stars, "#FDE68A"),
     ]
-    row_h = 30
-    width = 460
-    hero_h = 96
-    height = 44 + hero_h + len(rows) * row_h + 20
-    max_side = max((v for _, v, _ in rows), default=1) or 1
-    star_steps = count_up_steps(total_stars, steps=8)
-    step_dur = 0.16
-    star_settle = len(star_steps) * step_dur
+    star_steps = count_up_steps(total_stars, steps=9)
+    step_dur = 0.14
 
-    # Rolling number frames for Total Stars (opacity handoff).
     star_frames = []
     for idx, value in enumerate(star_steps):
         start = idx * step_dur
         if idx < len(star_steps) - 1:
             star_frames.append(
-                f'<text class="hero-num roll" x="118" y="88" text-anchor="start" opacity="0">'
+                f'<text text-anchor="middle" x="132" y="168" fill="#FDE68A" '
+                f'font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="52" font-weight="800" opacity="0">'
                 f"{escape(compact(value))}"
-                f'<animate attributeName="opacity" values="0;1;1;0" '
-                f'keyTimes="0;0.15;0.85;1" dur="{step_dur:.2f}s" begin="{start:.2f}s" fill="remove"/>'
+                f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.88;1" '
+                f'dur="{step_dur:.2f}s" begin="{start:.2f}s" fill="remove"/>'
                 f"</text>"
             )
         else:
             star_frames.append(
-                f'<text class="hero-num" x="118" y="88" text-anchor="start" opacity="0">'
+                f'<text text-anchor="middle" x="132" y="168" fill="#FDE68A" '
+                f'font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="52" font-weight="800" opacity="0" '
+                f'filter="url(#goldGlow)">'
                 f"{escape(compact(value))}"
-                f'<animate attributeName="opacity" from="0" to="1" '
-                f'dur="0.25s" begin="{start:.2f}s" fill="freeze"/>'
+                f'<animate attributeName="opacity" from="0" to="1" dur="0.3s" begin="{start:.2f}s" fill="freeze"/>'
                 f"</text>"
             )
 
-    row_blocks = []
-    for i, (label, value, color) in enumerate(rows):
-        y = 44 + hero_h + 24 + i * row_h
-        delay = star_settle + 0.12 + i * 0.12
-        bw = bar_width(value, max_side, 150)
-        row_blocks.append(
-            f'<g class="row" style="animation-delay: {delay:.2f}s">'
-            f'<circle cx="28" cy="{y - 4}" r="4" fill="{color}">'
-            f'<animate attributeName="r" values="0;5;4" dur="0.45s" begin="{delay:.2f}s" fill="freeze"/>'
-            f"</circle>"
-            f'<text class="label" x="42" y="{y}">{escape(label)}</text>'
-            f'<rect class="track" x="170" y="{y - 10}" width="150" height="7" rx="3.5"/>'
-            f'<rect class="bar" x="170" y="{y - 10}" width="0" height="7" rx="3.5" fill="{color}">'
-            f'<animate attributeName="width" from="0" to="{bw:.1f}" '
-            f'dur="0.9s" begin="{delay:.2f}s" fill="freeze" '
+    # 2x3 metric tiles on the right (skip last Stars tile — already hero)
+    side = [t for t in tiles if t[0] != "Stars"]
+    tile_svg = []
+    for i, (label, value, color) in enumerate(side):
+        col, row = i % 2, i // 2
+        x, y = 270 + col * 115, 70 + row * 70
+        delay = 1.1 + i * 0.1
+        tile_svg.append(
+            f'<g transform="translate({x},{y})">'
+            f'<rect width="105" height="58" rx="12" fill="#2A1038" stroke="{color}" stroke-width="1.2" opacity="0">'
+            f'<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="{delay:.2f}s" fill="freeze"/>'
+            f"</rect>"
+            f'<text x="12" y="22" fill="#C4B5D4" font-family="Segoe UI, Ubuntu, Sans-Serif" '
+            f'font-size="11" font-weight="600" opacity="0">{escape(label)}'
+            f'<animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="{delay + 0.1:.2f}s" fill="freeze"/>'
+            f"</text>"
+            f'<text x="12" y="44" fill="{color}" font-family="Segoe UI, Ubuntu, Sans-Serif" '
+            f'font-size="20" font-weight="800" opacity="0">{escape(compact(value))}'
+            f'<animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="{delay + 0.18:.2f}s" fill="freeze"/>'
+            f"</text>"
+            f'<rect x="0" y="56" width="0" height="2" rx="1" fill="{color}">'
+            f'<animate attributeName="width" from="0" to="105" dur="0.7s" begin="{delay:.2f}s" fill="freeze" '
             f'calcMode="spline" keySplines="0.22 1 0.36 1"/>'
             f"</rect>"
-            f'<text class="value" x="{width - 22}" y="{y}" text-anchor="end" opacity="0">'
-            f"{escape(compact(value))}"
-            f'<animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="{delay + 0.25:.2f}s" fill="freeze"/>'
-            f"</text>"
             f"</g>"
         )
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{escape(USERNAME)} GitHub stats">
 <defs>
-  <linearGradient id="statsStroke" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%" stop-color="{PURPLE}"/>
-    <stop offset="100%" stop-color="{PURPLE_SOFT}"/>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#12061A"/>
+    <stop offset="50%" stop-color="#1C0A2E"/>
+    <stop offset="100%" stop-color="#2A0B3D"/>
   </linearGradient>
-  <linearGradient id="heroFill" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%" stop-color="#4A0A5C"/>
-    <stop offset="55%" stop-color="{PURPLE}"/>
-    <stop offset="100%" stop-color="#B8860B"/>
+  <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#3B1058"/>
+    <stop offset="100%" stop-color="#1A0826"/>
   </linearGradient>
-  <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
-    <feGaussianBlur stdDeviation="2.2" result="b"/>
+  <radialGradient id="aura" cx="35%" cy="45%" r="55%">
+    <stop offset="0%" stop-color="#82318E" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#12061A" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="goldGlow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="3" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="neon" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="2.5" result="b"/>
     <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
   </filter>
 </defs>
-<style>
-  .title {{ font: 600 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE}; }}
-  .label {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_MUTED}; }}
-  .value {{ font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_INK}; }}
-  .hero-label {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F3E8FF; }}
-  .hero-num {{ font: 800 34px 'Segoe UI', Ubuntu, Sans-Serif; fill: #FFE08A; }}
-  .hero-sub {{ font: 600 11px 'Segoe UI', Ubuntu, Sans-Serif; fill: #EDE0F5; }}
-  .card {{ fill: #FCF8FF; stroke: url(#statsStroke); }}
-  .track {{ fill: {PURPLE_PALE}; }}
-  .row {{ opacity: 0; animation: rowIn 0.55s ease forwards; }}
-  .star {{ transform-origin: 48px 70px; animation: starPulse 1.6s ease-in-out infinite; }}
-  @keyframes rowIn {{
-    from {{ opacity: 0; transform: translateX(-8px); }}
-    to {{ opacity: 1; transform: translateX(0); }}
-  }}
-  @keyframes starPulse {{
-    0%, 100% {{ transform: scale(1); }}
-    50% {{ transform: scale(1.12); }}
-  }}
-  @keyframes sheen {{
-    0% {{ transform: translateX(-120px); opacity: 0; }}
-    35% {{ opacity: 0.35; }}
-    100% {{ transform: translateX(420px); opacity: 0; }}
-  }}
-  .sheen {{ animation: sheen 2.8s ease-in-out infinite; }}
-</style>
-<rect class="card" x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="10"/>
-<text class="title" x="18" y="28">{escape(USERNAME)}'s GitHub Stats</text>
 
-<g transform="translate(14, 40)">
-  <rect x="0" y="0" width="432" height="84" rx="12" fill="url(#heroFill)"/>
-  <rect class="sheen" x="0" y="0" width="70" height="84" fill="#ffffff" opacity="0.18"/>
-  <g class="star" filter="url(#softGlow)">
-    <polygon points="48,18 53,36 72,36 57,48 63,66 48,54 33,66 39,48 24,36 43,36" fill="#FFD54A">
-      <animate attributeName="opacity" values="0.85;1;0.85" dur="1.6s" repeatCount="indefinite"/>
-    </polygon>
-  </g>
-  <text class="hero-label" x="118" y="28">Total Stars</text>
-  {"".join(star_frames)}
-  <text class="hero-sub" x="118" y="70">across public repositories</text>
-  <circle cx="400" cy="42" r="18" fill="none" stroke="#FFE08A" stroke-width="3" stroke-linecap="round"
-          stroke-dasharray="113" stroke-dashoffset="113">
-    <animate attributeName="stroke-dashoffset" from="113" to="18" dur="1.4s" fill="freeze"
-             calcMode="spline" keySplines="0.22 1 0.36 1"/>
+<rect width="{width}" height="{height}" rx="18" fill="url(#bg)"/>
+<rect width="{width}" height="{height}" rx="18" fill="url(#aura)"/>
+<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="17" fill="none" stroke="#A855F7" stroke-opacity="0.55">
+  <animate attributeName="stroke-opacity" values="0.35;0.85;0.35" dur="2.8s" repeatCount="indefinite"/>
+</rect>
+
+<text x="22" y="34" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="700">
+  {escape(USERNAME)} · Research Dashboard
+</text>
+<text x="22" y="52" fill="#A78BFA" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="11" font-weight="600">
+  Tsinghua Purple · Live GitHub Metrics
+</text>
+
+<!-- STAR CORE -->
+<g transform="translate(20, 68)">
+  <rect width="230" height="200" rx="16" fill="url(#panel)" stroke="#C084FC" stroke-opacity="0.45"/>
+  <circle cx="115" cy="100" r="78" fill="none" stroke="#FDE68A" stroke-width="2" stroke-dasharray="8 10" opacity="0.7">
+    <animateTransform attributeName="transform" type="rotate" from="0 115 100" to="360 115 100" dur="14s" repeatCount="indefinite"/>
   </circle>
+  <circle cx="115" cy="100" r="62" fill="none" stroke="#A855F7" stroke-width="3" stroke-linecap="round"
+          stroke-dasharray="390" stroke-dashoffset="390">
+    <animate attributeName="stroke-dashoffset" from="390" to="70" dur="1.6s" fill="freeze"
+             calcMode="spline" keySplines="0.22 1 0.36 1"/>
+    <animate attributeName="stroke-opacity" values="0.55;1;0.55" dur="2s" begin="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <polygon points="115,48 122,72 148,72 127,88 135,114 115,98 95,114 103,88 82,72 108,72"
+           fill="#FDE68A" filter="url(#goldGlow)">
+    <animate attributeName="opacity" values="0.75;1;0.75" dur="1.5s" repeatCount="indefinite"/>
+  </polygon>
+  {"".join(star_frames)}
+  <text text-anchor="middle" x="115" y="192" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif"
+        font-size="13" font-weight="700">TOTAL STARS</text>
 </g>
 
-{"".join(row_blocks)}
+{"".join(tile_svg)}
 </svg>
 """
 
@@ -270,65 +287,98 @@ def render_langs_svg(lang_counts: list[tuple[str, int]], limit: int = 8) -> str:
         items = [("Unknown", 1)]
 
     total = sum(c for _, c in items) or 1
-    width = 360
-    row_h = 26
-    height = 52 + len(items) * row_h + 18
+    width, height = 420, 300
     palette = [
-        PURPLE,
-        PURPLE_MID,
-        PURPLE_SOFT,
-        "#B57EDC",
-        "#C084FC",
-        "#D8B4FE",
         "#A855F7",
-        "#7E22CE",
+        "#C084FC",
+        "#E879F9",
+        "#F0ABFC",
+        "#D8B4FE",
+        "#7C3AED",
+        "#FDE68A",
+        "#F5D0FE",
     ]
 
-    max_count = max(c for _, c in items)
-    blocks = []
+    # Donut segments via stroke-dasharray on circles (SMIL draw-in).
+    circumference = 2 * 3.1415926 * 68
+    offset = 0.0
+    arcs = []
     for i, (lang, count) in enumerate(items):
-        y = 54 + i * row_h
+        color = palette[i % len(palette)]
+        frac = count / total
+        seg = circumference * frac
+        gap = circumference - seg
+        # rotate so segments accumulate
+        rotation = -90 + (offset / circumference) * 360
+        delay = 0.2 + i * 0.18
+        arcs.append(
+            f'<circle cx="120" cy="150" r="68" fill="none" stroke="{color}" stroke-width="18" '
+            f'stroke-dasharray="0 {circumference:.2f}" stroke-linecap="butt" '
+            f'transform="rotate({rotation:.2f} 120 150)" filter="url(#arcGlow)">'
+            f'<animate attributeName="stroke-dasharray" '
+            f'from="0 {circumference:.2f}" to="{seg:.2f} {gap:.2f}" '
+            f'dur="1.1s" begin="{delay:.2f}s" fill="freeze" '
+            f'calcMode="spline" keySplines="0.22 1 0.36 1"/>'
+            f"</circle>"
+        )
+        offset += seg
+
+    legend = []
+    for i, (lang, count) in enumerate(items):
         color = palette[i % len(palette)]
         pct = 100.0 * count / total
-        bw = bar_width(count, max_count, 160)
-        delay = 0.15 + i * 0.14
-        blocks.append(
-            f'<g class="lang-row" style="animation-delay:{delay:.2f}s">'
-            f'<text class="label" x="20" y="{y}">{escape(lang)}</text>'
-            f'<rect class="track" x="130" y="{y - 10}" width="160" height="8" rx="4"/>'
-            f'<rect x="130" y="{y - 10}" width="0" height="8" rx="4" fill="{color}">'
-            f'<animate attributeName="width" from="0" to="{bw:.1f}" dur="1s" begin="{delay:.2f}s" '
-            f'fill="freeze" calcMode="spline" keySplines="0.22 1 0.36 1"/>'
+        y = 78 + i * 36
+        delay = 0.35 + i * 0.12
+        bw = bar_width(count, max(c for _, c in items), 120)
+        legend.append(
+            f'<g opacity="0">'
+            f'<animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="{delay:.2f}s" fill="freeze"/>'
+            f'<circle cx="250" cy="{y - 4}" r="5" fill="{color}"/>'
+            f'<text x="264" y="{y}" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif" '
+            f'font-size="13" font-weight="700">{escape(lang)}</text>'
+            f'<text x="390" y="{y}" text-anchor="end" fill="{color}" font-family="Segoe UI, Ubuntu, Sans-Serif" '
+            f'font-size="13" font-weight="800">{pct:.1f}%</text>'
+            f'<rect x="250" y="{y + 8}" width="140" height="5" rx="2.5" fill="#3B1058"/>'
+            f'<rect x="250" y="{y + 8}" width="0" height="5" rx="2.5" fill="{color}">'
+            f'<animate attributeName="width" from="0" to="{bw:.1f}" dur="0.9s" begin="{delay:.2f}s" fill="freeze" '
+            f'calcMode="spline" keySplines="0.22 1 0.36 1"/>'
             f"</rect>"
-            f'<text class="pct" x="{width - 20}" y="{y}" text-anchor="end" opacity="0">'
-            f"{pct:.1f}%"
-            f'<animate attributeName="opacity" from="0" to="1" dur="0.35s" begin="{delay + 0.35:.2f}s" fill="freeze"/>'
-            f"</text>"
             f"</g>"
         )
 
+    top_name, top_count = items[0]
+    top_pct = 100.0 * top_count / total
+
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Top Languages">
 <defs>
-  <linearGradient id="langStroke" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%" stop-color="{PURPLE}"/>
-    <stop offset="100%" stop-color="{PURPLE_SOFT}"/>
+  <linearGradient id="langBg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#12061A"/>
+    <stop offset="100%" stop-color="#2A0B3D"/>
   </linearGradient>
+  <filter id="arcGlow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="1.6" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
 </defs>
-<style>
-  .title {{ font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE}; }}
-  .label {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_MUTED}; }}
-  .pct {{ font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: {PURPLE_INK}; }}
-  .track {{ fill: {PURPLE_PALE}; }}
-  .card {{ fill: #FCF8FF; stroke: url(#langStroke); }}
-  .lang-row {{ opacity: 0; animation: fadeUp 0.5s ease forwards; }}
-  @keyframes fadeUp {{
-    from {{ opacity: 0; transform: translateY(6px); }}
-    to {{ opacity: 1; transform: translateY(0); }}
-  }}
-</style>
-<rect class="card" x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="8"/>
-<text class="title" x="20" y="30">Most Used Languages</text>
-{"".join(blocks)}
+<rect width="{width}" height="{height}" rx="18" fill="url(#langBg)"/>
+<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="17" fill="none" stroke="#C084FC" stroke-opacity="0.5">
+  <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+</rect>
+<text x="22" y="34" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="15" font-weight="700">
+  Language Spectrum
+</text>
+<text x="22" y="52" fill="#A78BFA" font-family="Segoe UI, Ubuntu, Sans-Serif" font-size="11" font-weight="600">
+  Byte-weighted stack signal
+</text>
+
+{"".join(arcs)}
+<circle cx="120" cy="150" r="46" fill="#1A0826"/>
+<text text-anchor="middle" x="120" y="144" fill="#E9D5FF" font-family="Segoe UI, Ubuntu, Sans-Serif"
+      font-size="12" font-weight="700">{escape(top_name)}</text>
+<text text-anchor="middle" x="120" y="168" fill="#FDE68A" font-family="Segoe UI, Ubuntu, Sans-Serif"
+      font-size="18" font-weight="800">{top_pct:.0f}%</text>
+
+{"".join(legend)}
 </svg>
 """
 
@@ -457,11 +507,12 @@ def main() -> int:
 
     total_stars = sum(int(r.get("stargazers_count") or 0) for r in repos)
     total_forks = sum(int(r.get("forks_count") or 0) for r in repos)
-    lang_counter: Counter[str] = Counter()
-    for repo in repos:
-        lang = repo.get("language")
-        if lang:
-            lang_counter[lang] += 1
+    lang_counter = fetch_language_bytes(repos, top_n=25)
+    if not lang_counter:
+        for repo in repos:
+            lang = repo.get("language")
+            if lang:
+                lang_counter[lang] += 1
 
     prs = fetch_count(f"author:{USERNAME} type:pr")
     issues = fetch_count(f"author:{USERNAME} type:issue")
@@ -470,23 +521,24 @@ def main() -> int:
     about_path = OUT_DIR / "about.svg"
     stats_path = OUT_DIR / "stats.svg"
     langs_path = OUT_DIR / "top-langs.svg"
+    # Versioned filenames bust GitHub/camo image cache after redesigns.
+    stats_v_path = OUT_DIR / "stats-neon.svg"
+    langs_v_path = OUT_DIR / "langs-neon.svg"
 
     about_path.write_text(render_about_card(), encoding="utf-8")
-    stats_path.write_text(
-        render_stats_svg(
-            total_stars=total_stars,
-            total_forks=total_forks,
-            public_repos=int(user.get("public_repos") or len(repos)),
-            followers=int(user.get("followers") or 0),
-            prs=prs,
-            issues=issues,
-        ),
-        encoding="utf-8",
+    stats_svg = render_stats_svg(
+        total_stars=total_stars,
+        total_forks=total_forks,
+        public_repos=int(user.get("public_repos") or len(repos)),
+        followers=int(user.get("followers") or 0),
+        prs=prs,
+        issues=issues,
     )
-    langs_path.write_text(
-        render_langs_svg(lang_counter.most_common(8)),
-        encoding="utf-8",
-    )
+    langs_svg = render_langs_svg(lang_counter.most_common(6))
+    stats_path.write_text(stats_svg, encoding="utf-8")
+    langs_path.write_text(langs_svg, encoding="utf-8")
+    stats_v_path.write_text(stats_svg, encoding="utf-8")
+    langs_v_path.write_text(langs_svg, encoding="utf-8")
 
     featured = [by_name[name] for name in FEATURED_REPOS if name in by_name]
     if not featured:
@@ -500,8 +552,8 @@ def main() -> int:
         print(f"Wrote {path}")
 
     print(f"Wrote {about_path}")
-    print(f"Wrote {stats_path} (stars={total_stars})")
-    print(f"Wrote {langs_path} (langs={len(lang_counter)})")
+    print(f"Wrote {stats_path} / {stats_v_path} (stars={total_stars})")
+    print(f"Wrote {langs_path} / {langs_v_path} (langs={len(lang_counter)})")
     return 0
 
 
