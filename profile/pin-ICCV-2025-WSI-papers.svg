@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="118" viewBox="0 0 400 118" role="img" aria-label="CVPR-2025-WSI-Papers">
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="118" viewBox="0 0 400 118" role="img" aria-label="ICCV-2025-WSI-papers">
 <defs>
   <linearGradient id="pinBg" x1="0%" y1="0%" x2="100%" y2="100%">
     <stop offset="0%" stop-color="#1A0530"/>
@@ -13,10 +13,10 @@
   .star-meta { font: 700 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #F5D76E; }
 </style>
 <rect x="0.5" y="0.5" width="399" height="117" rx="12" fill="url(#pinBg)" stroke="#E9D5FF" stroke-opacity="0.35"/>
-<text class="name" x="18" y="30">CVPR-2025-WSI-Papers</text>
-<text class="desc" x="18" y="54">Whole Slide Images papers in CVPR-2025</text>
+<text class="name" x="18" y="30">ICCV-2025-WSI-papers</text>
+<text class="desc" x="18" y="54">No description provided.</text>
 <circle cx="24" cy="96" r="4" fill="#C084FC"/>
 <text class="meta" x="34" y="100">Markdown</text>
-<text class="star-meta" x="150" y="100">★ 58</text>
+<text class="star-meta" x="150" y="100">★ 16</text>
 <text class="meta" x="230" y="100">fork 0</text>
 </svg>
