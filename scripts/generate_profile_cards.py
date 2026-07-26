@@ -11,6 +11,7 @@ import json
 import os
 import ssl
 import sys
+import textwrap
 import urllib.error
 import urllib.request
 from collections import Counter
@@ -22,6 +23,14 @@ USERNAME = os.environ.get("GITHUB_USERNAME", "lingxitong")
 TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN") or ""
 OUT_DIR = Path(os.environ.get("PROFILE_OUT_DIR", "profile"))
 API = "https://api.github.com"
+
+# Featured repos shown as pin-style cards (order preserved when found).
+FEATURED_REPOS = [
+    "MIL_BASELINE",
+    "Awesome-AI4DigitalPathology",
+    "CVPR-2025-WSI-Papers",
+    "PFM_Segmentation",
+]
 
 
 def api_get(url: str) -> Any:
@@ -84,6 +93,18 @@ def bar_width(value: int, maximum: int, max_width: float = 180.0) -> float:
     return max(4.0, max_width * value / maximum)
 
 
+def wrap_text(text: str, width: int = 48, max_lines: int = 2) -> list[str]:
+    cleaned = " ".join((text or "").split())
+    if not cleaned:
+        return ["No description provided."]
+    lines = textwrap.wrap(cleaned, width=width) or ["No description provided."]
+    if len(lines) > max_lines:
+        lines = lines[:max_lines]
+        if len(lines[-1]) > 3:
+            lines[-1] = lines[-1][:-3].rstrip() + "..."
+    return lines
+
+
 def render_stats_svg(
     *,
     total_stars: int,
@@ -108,8 +129,7 @@ def render_stats_svg(
     lines = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" role="img" '
-        f'aria-label="{escape(USERNAME)} GitHub stats">'
-        ,
+        f'aria-label="{escape(USERNAME)} GitHub stats">',
         "<style>",
         "  .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }",
         "  .label { font: 600 13px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }",
@@ -155,8 +175,7 @@ def render_langs_svg(lang_counts: list[tuple[str, int]], limit: int = 8) -> str:
 
     lines = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
-        f'viewBox="0 0 {width} {height}" role="img" aria-label="Top Languages">'
-        ,
+        f'viewBox="0 0 {width} {height}" role="img" aria-label="Top Languages">',
         "<style>",
         "  .title { font: 600 16px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }",
         "  .label { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }",
@@ -187,9 +206,43 @@ def render_langs_svg(lang_counts: list[tuple[str, int]], limit: int = 8) -> str:
     return "\n".join(lines) + "\n"
 
 
+def render_repo_card(repo: dict[str, Any]) -> str:
+    name = repo.get("name") or "repository"
+    desc_lines = wrap_text(repo.get("description") or "", width=46, max_lines=2)
+    language = repo.get("language") or "Markdown"
+    stars = int(repo.get("stargazers_count") or 0)
+    forks = int(repo.get("forks_count") or 0)
+    width, height = 400, 118
+
+    lines = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
+        f'viewBox="0 0 {width} {height}" role="img" aria-label="{escape(name)}">'
+        ,
+        "<style>",
+        "  .name { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }",
+        "  .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }",
+        "  .meta { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #656d76; }",
+        "  .card { fill: #ffffff; stroke: #d0d7de; }",
+        "</style>",
+        f'<rect class="card" x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="8"/>',
+        f'<text class="name" x="18" y="30">{escape(name)}</text>',
+    ]
+    for i, line in enumerate(desc_lines):
+        lines.append(f'<text class="desc" x="18" y="{54 + i * 16}">{escape(line)}</text>')
+
+    meta_y = 100
+    lines.append(f'<circle cx="24" cy="{meta_y - 4}" r="4" fill="#2f81f7"/>')
+    lines.append(f'<text class="meta" x="34" y="{meta_y}">{escape(language)}</text>')
+    lines.append(f'<text class="meta" x="150" y="{meta_y}">★ {escape(compact(stars))}</text>')
+    lines.append(f'<text class="meta" x="230" y="{meta_y}">⑂ {escape(compact(forks))}</text>')
+    lines.append("</svg>")
+    return "\n".join(lines) + "\n"
+
+
 def main() -> int:
     user = fetch_user()
     repos = fetch_owned_repos()
+    by_name = {r.get("name"): r for r in repos}
 
     total_stars = sum(int(r.get("stargazers_count") or 0) for r in repos)
     total_forks = sum(int(r.get("forks_count") or 0) for r in repos)
@@ -221,6 +274,17 @@ def main() -> int:
         render_langs_svg(lang_counter.most_common(8)),
         encoding="utf-8",
     )
+
+    featured = [by_name[name] for name in FEATURED_REPOS if name in by_name]
+    if not featured:
+        featured = sorted(
+            repos, key=lambda r: int(r.get("stargazers_count") or 0), reverse=True
+        )[:4]
+
+    for repo in featured:
+        path = OUT_DIR / f"pin-{repo['name']}.svg"
+        path.write_text(render_repo_card(repo), encoding="utf-8")
+        print(f"Wrote {path}")
 
     print(f"Wrote {stats_path} (stars={total_stars})")
     print(f"Wrote {langs_path} (langs={len(lang_counter)})")

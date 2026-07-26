@@ -1,50 +1,114 @@
-<h2>
-  Hey there! I'm Xitong Ling.
-</h2>
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0B4F6C,50:1B7A9E,100:58A6FF&height=160&section=header&text=Xitong%20Ling&fontSize=42&fontColor=ffffff&fontAlignY=35&desc=Computational%20Pathology%20%C2%B7%20Foundation%20Models%20%C2%B7%20Medical%20AI&descAlignY=58&descSize=15" alt="header" width="100%">
 
+  <a href="https://lingxitong.github.io/">
+    <img src="https://img.shields.io/badge/Homepage-lingxitong.github.io-0B4F6C?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Homepage">
+  </a>
+  <a href="mailto:lingxt23@mails.tsinghua.edu.cn">
+    <img src="https://img.shields.io/badge/Email-lingxt23%40mails.tsinghua.edu.cn-1B7A9E?style=for-the-badge&logo=gmail&logoColor=white" alt="Email">
+  </a>
+  <a href="https://github.com/lingxitong">
+    <img src="https://img.shields.io/badge/GitHub-lingxitong-24292F?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+  </a>
 
-<h3>👨🏻‍💻 About Me</h3>
+  <br><br>
 
-- 🔭 &nbsp; Bachelor: Beihang University
-- 🤔 &nbsp; Master: Tsinghua University
-- 🎓 &nbsp; Fields: AI4Healthcare / 3DV / World Model
-- 💼 &nbsp; Email: lingxt23@mails.tsinghua.edu.cn/
-- 🧬 &nbsp; Research Interests: Computational Pathology, Foundation Models, Medical AI, WSI Analysis
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3200&pause=900&color=1B7A9E&center=true&vCenter=true&width=760&lines=M.S.+%40+Tsinghua+University;Computational+Pathology+%2F+WSI+Analysis;Foundation+Models+%26+Multimodal+Learning;Open-source+MIL+%26+Medical+AI" alt="Typing SVG">
+</div>
 
-<br>
+---
 
-<h3>🛠 Tech Stack</h3>
+### About Me
 
-- 💻 &nbsp; Python | Java | C++ | C#
-- 🛢 &nbsp; MySQL | Firebase | XAMPP | Docker
-- 🔧 &nbsp; VS Code | PyCharm | Eclipse | Git
-- 🧠 &nbsp; PyTorch | Hugging Face | OpenCV | Scikit-learn
+```python
+researcher = {
+    "name": "Xitong Ling",
+    "affiliation": "Tsinghua University (SIGS)",
+    "background": "Beihang University → Tsinghua University",
+    "focus": [
+        "Computational Pathology",
+        "Multiple Instance Learning",
+        "Foundation Models",
+        "Multimodal Learning",
+    ],
+    "status": "Seeking Ph.D. opportunities",
+    "homepage": "https://lingxitong.github.io/",
+}
+```
 
-<br>
+- Bachelor: Beihang University
+- Master: Tsinghua University
+- Fields: AI4Healthcare / Computational Pathology / Foundation Models
+- Interests: MIL, WSI Analysis, Multimodal Learning, Medical AI
+- Email: lingxt23@mails.tsinghua.edu.cn
 
-<h3>📊 GitHub Stats</h3>
+---
+
+### Tech Stack
 
 <p align="center">
-  <img src="./profile/stats.svg" alt="Xitong Ling's GitHub Stats" width="420">
+  <img src="https://skillicons.dev/icons?i=python,pytorch,opencv,sklearn,git,docker,linux,cpp,java,cs,vscode,anaconda&perline=6" alt="Tech Stack">
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black" alt="Hugging Face">
+  <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white" alt="OpenCV">
+  <img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" alt="Scikit-learn">
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
+</p>
+
+---
+
+### Featured Work
+
+<p align="center">
+  <a href="https://github.com/lingxitong/MIL_BASELINE">
+    <img src="./profile/pin-MIL_BASELINE.svg" alt="MIL_BASELINE" width="400">
+  </a>
+  <a href="https://github.com/lingxitong/Awesome-AI4DigitalPathology">
+    <img src="./profile/pin-Awesome-AI4DigitalPathology.svg" alt="Awesome-AI4DigitalPathology" width="400">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/lingxitong/CVPR-2025-WSI-Papers">
+    <img src="./profile/pin-CVPR-2025-WSI-Papers.svg" alt="CVPR-2025-WSI-Papers" width="400">
+  </a>
+  <a href="https://github.com/lingxitong/PFM_Segmentation">
+    <img src="./profile/pin-PFM_Segmentation.svg" alt="PFM_Segmentation" width="400">
+  </a>
+</p>
+
+---
+
+### GitHub Stats
+
+<p align="center">
+  <img src="./profile/stats.svg" alt="GitHub Stats" width="420">
   <img src="./profile/top-langs.svg" alt="Top Languages" width="360">
 </p>
 
-<br>
+---
 
-<p>
-  Feel free to reach me at:
-  <br>
-  <b>Email:</b> lingxt23@mails.tsinghua.edu.cn
-</p>
+### Contribution Snake
 
-<br>
-
-<!-- Optional: Contribution Snake -->
-<!--
 <p align="center">
-  <img src="./profile/github-contribution-grid-snake.svg" alt="Contribution Snake">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/lingxitong/lingxitong/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/lingxitong/lingxitong/output/github-contribution-grid-snake.svg">
+    <img alt="github contribution snake" src="https://raw.githubusercontent.com/lingxitong/lingxitong/output/github-contribution-grid-snake.svg">
+  </picture>
 </p>
--->
+
+---
+
+<div align="center">
+  <b>Feel free to reach out for research discussion & collaboration.</b>
+  <br>
+  Homepage: <a href="https://lingxitong.github.io/">lingxitong.github.io</a>
+  · Email: <a href="mailto:lingxt23@mails.tsinghua.edu.cn">lingxt23@mails.tsinghua.edu.cn</a>
+  <br><br>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0B4F6C,50:1B7A9E,100:58A6FF&height=100&section=footer" alt="footer" width="100%">
+</div>

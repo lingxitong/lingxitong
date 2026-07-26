@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="118" viewBox="0 0 400 118" role="img" aria-label="CVPR-2025-WSI-Papers">
+<style>
+  .name { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }
+  .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }
+  .meta { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #656d76; }
+  .card { fill: #ffffff; stroke: #d0d7de; }
+</style>
+<rect class="card" x="0.5" y="0.5" width="399" height="117" rx="8"/>
+<text class="name" x="18" y="30">CVPR-2025-WSI-Papers</text>
+<text class="desc" x="18" y="54">Whole Slide Images papers in CVPR-2025</text>
+<circle cx="24" cy="96" r="4" fill="#2f81f7"/>
+<text class="meta" x="34" y="100">Markdown</text>
+<text class="meta" x="150" y="100">★ 58</text>
+<text class="meta" x="230" y="100">⑂ 0</text>
+</svg>

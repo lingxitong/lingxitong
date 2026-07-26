@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="118" viewBox="0 0 400 118" role="img" aria-label="Awesome-AI4DigitalPathology">
+<style>
+  .name { font: 700 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: #2f81f7; }
+  .desc { font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #57606a; }
+  .meta { font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: #656d76; }
+  .card { fill: #ffffff; stroke: #d0d7de; }
+</style>
+<rect class="card" x="0.5" y="0.5" width="399" height="117" rx="8"/>
+<text class="name" x="18" y="30">Awesome-AI4DigitalPathology</text>
+<text class="desc" x="18" y="54">A Curated List of Awesome Works in</text>
+<text class="desc" x="18" y="70">Computational Pathology, Aiming to Serve a...</text>
+<circle cx="24" cy="96" r="4" fill="#2f81f7"/>
+<text class="meta" x="34" y="100">Python</text>
+<text class="meta" x="150" y="100">★ 247</text>
+<text class="meta" x="230" y="100">⑂ 19</text>
+</svg>
