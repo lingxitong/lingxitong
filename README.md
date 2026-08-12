@@ -25,7 +25,7 @@
 <img src="https://cdn.jsdelivr.net/gh/lingxitong/lingxitong@main/profile/about-card.svg?v=20260726" alt="About Xitong Ling" width="100%">
 
 - Bachelor: Beihang University
-- PhD Student: Tsinghua University (SIGS)
+- PhD Student: Tsinghua University （SIGS/AIR）
 - Research Fields: Representation Learning / AI4Healthcare
 - Interests: Computational Pathology, Foundation Models, Multimodal Learning, WSI Analysis
 - Email: lingxt23@mails.tsinghua.edu.cn
